@@ -41,7 +41,8 @@
      WORD = 258,
      NOTOKEN = 259,
      GREAT = 260,
-     NEWLINE = 261
+     NEWLINE = 261,
+     LESS = 262
    };
 #endif
 /* Tokens.  */
@@ -49,6 +50,7 @@
 #define NOTOKEN 259
 #define GREAT 260
 #define NEWLINE 261
+#define LESS 262
 
 
 
@@ -65,7 +67,7 @@ typedef union YYSTYPE
 
 
 /* Line 1685 of yacc.c  */
-#line 69 "y.tab.h"
+#line 71 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
