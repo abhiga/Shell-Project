@@ -13,7 +13,7 @@
 
 %token	<string_val> WORD
 
-%token 	NOTOKEN GREAT NEWLINE LESS
+%token 	NOTOKEN GREAT NEWLINE LESS  
 
 %union	{
 		char   *string_val;
