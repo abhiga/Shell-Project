@@ -13,7 +13,7 @@
 
 %token	<string_val> WORD
 
-%token 	NOTOKEN GREAT NEWLINE LESS GREATAMPERSAND AMPERSAND
+%token 	NOTOKEN GREAT NEWLINE LESS GREATAMPERSAND AMPERSAND PIPE GREATGREATAMPERSAND
 
 %union	{
 		char   *string_val;
@@ -95,6 +95,10 @@ iomodifier_opt:
 	GREATAMPERSAND WORD {
 		Command::_currentCommand._outFile = $2;
 		Command::_currentCommand._errFile = strdup($2);
+	}
+	|
+	GREATGREATAMPERSAND WORD {
+		
 	}
 	|/* can be empty */ 
 	;
