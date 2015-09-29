@@ -30,16 +30,26 @@ void myunputc(int c) {
 		/* Discard spaces and tabs */
      	}
 
+"|"		{
+			return PIPE;
+		}
+
 "&"		{
 		return AMPERSAND;
+		}
+
+">>&"   {
+		return GREATGREATAMPERSAND;
 		}
 
 ">&"	{
 		return GREATAMPERSAND;
 		}
+
 ">" 	{
 		return GREAT;
-	}
+		}
+
 "<"		{
 		return LESS;
 		}
