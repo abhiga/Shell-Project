@@ -80,6 +80,10 @@ command_word:
 	       Command::_currentSimpleCommand->insertArgument( $1 );
 	}
 	;
+iomodifier_list:
+	iomodifier_opt
+	| iomodifier_list iomodifier_opt
+	;
 
 iomodifier_opt:
 	GREAT WORD {
