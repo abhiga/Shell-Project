@@ -104,7 +104,7 @@ background_optional:
 		Command::_currentCommand._background = 1;
 	}
 	|
-
+	;
 %%
 
 void
