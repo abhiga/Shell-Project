@@ -80,12 +80,6 @@ command_word:
 	       Command::_currentSimpleCommand->insertArgument( $1 );
 	}
 	;
-iomodifier_list:
-	iomodifier_opt
-	|
-	iomodifier_list iomodifier_opt
-	|
-	;
 
 iomodifier_opt:
 	GREAT WORD {
@@ -105,6 +99,14 @@ iomodifier_opt:
 	|
 	 /* can be empty */ 
 	;
+
+iomodifier_list:
+	iomodifier_opt
+	|
+	iomodifier_list iomodifier_opt
+	|
+	;
+
 background_optional:
 	AMPERSAND {
 		Command::_currentCommand._background = 1;
