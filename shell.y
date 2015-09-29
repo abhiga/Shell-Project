@@ -22,6 +22,7 @@
 %{
 //#define yylex yylex
 #include <stdio.h>
+#include <string.h>
 #include "command.h"
 void yyerror(const char * s);
 int yylex();
@@ -93,7 +94,7 @@ iomodifier_opt:
 	|
 	GREATAMPERSAND WORD {
 		Command::_currentCommand._outFile = $2;
-		Command::_currentCommand._errFile = $2;
+		Command::_currentCommand._errFile = strdup($2);
 	}
 	|
 	 /* can be empty */ 
