@@ -13,7 +13,7 @@
 
 %token	<string_val> WORD
 
-%token 	NOTOKEN GREAT NEWLINE LESS  
+%token 	NOTOKEN GREAT NEWLINE LESS GREATAMPERSAND
 
 %union	{
 		char   *string_val;
@@ -89,6 +89,9 @@ iomodifier_opt:
 	LESS WORD {
 		printf ("  Yacc: inster input \"%s\"\n", $2);
 		Command::_currentCommand._inputFile = $2;
+	}
+	|
+	GREATAMPERSAND WORD {
 	}
 	|
 	 /* can be empty */ 
