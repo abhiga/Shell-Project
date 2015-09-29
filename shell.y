@@ -13,7 +13,7 @@
 
 %token	<string_val> WORD
 
-%token 	NOTOKEN GREAT NEWLINE LESS GREATAMPERSAND
+%token 	NOTOKEN GREAT NEWLINE LESS GREATAMPERSAND AMPERSAND
 
 %union	{
 		char   *string_val;
@@ -99,6 +99,11 @@ iomodifier_opt:
 	|
 	 /* can be empty */ 
 	;
+background_optional:
+	AMPERSAND {
+		Command::_currentCommand._background = 1;
+	}
+	|
 
 %%
 

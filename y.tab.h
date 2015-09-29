@@ -43,7 +43,8 @@
      GREAT = 260,
      NEWLINE = 261,
      LESS = 262,
-     GREATAMPERSAND = 263
+     GREATAMPERSAND = 263,
+     AMPERSAND = 264
    };
 #endif
 /* Tokens.  */
@@ -53,6 +54,7 @@
 #define NEWLINE 261
 #define LESS 262
 #define GREATAMPERSAND 263
+#define AMPERSAND 264
 
 
 
@@ -69,7 +71,7 @@ typedef union YYSTYPE
 
 
 /* Line 1685 of yacc.c  */
-#line 73 "y.tab.h"
+#line 75 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
