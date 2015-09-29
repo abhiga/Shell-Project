@@ -96,8 +96,7 @@ iomodifier_opt:
 		Command::_currentCommand._outFile = $2;
 		Command::_currentCommand._errFile = strdup($2);
 	}
-	|
-	 /* can be empty */ 
+	|/* can be empty */ 
 	;
 
 iomodifier_list:
