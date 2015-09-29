@@ -35,7 +35,7 @@ void myunputc(int c) {
 		}
 
 ">&"	{
-			return GREATAMPERSAND;
+		return GREATAMPERSAND;
 		}
 ">" 	{
 		return GREAT;
