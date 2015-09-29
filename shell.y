@@ -93,6 +93,7 @@ iomodifier_opt:
 	|
 	GREATAMPERSAND WORD {
 		Command::_currentCommand._outFile = $2;
+		Command::_currentCommand._errFile = $2;
 	}
 	|
 	 /* can be empty */ 
