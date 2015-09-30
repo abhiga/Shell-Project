@@ -95,7 +95,7 @@ background_optional:
 
 iomodifier_list:
 	iomodifier_list iomodifier_opt
-
+|
 	;
 
 iomodifier_opt:
@@ -120,7 +120,7 @@ iomodifier_opt:
 	|
 	GREATGREAT WORD {
 	}
-	|/* can be empty */ 
+	/* can be empty */ 
 	;
 
 
