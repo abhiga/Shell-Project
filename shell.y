@@ -115,10 +115,14 @@ iomodifier_opt:
 	}
 	|
 	GREATGREATAMPERSAND WORD {
-		
+		Command::_currentCommand._append = 1;
+		Command::_currentCommand._outFile = $2;
+		Command::_currentCommand._errFile = strdup($2);
 	}
 	|
 	GREATGREAT WORD {
+		Command::_currentCommand._append = 1;
+		Command::_currentCommand._outFile = $2;
 	}
 	/* can be empty */ 
 	;
