@@ -44,7 +44,7 @@ command: simple_command
         ;
 
 simple_command:	
-	pipe_list iomodifier_list background_optional NEWLINE {
+	pipe_list iomodifier_opt background_optional NEWLINE {
 		printf("   Yacc: Execute command\n");
 		Command::_currentCommand.execute();
 	}
@@ -71,12 +71,10 @@ argument:
 	       Command::_currentSimpleCommand->insertArgument( $1 );\
 	}
 	;
-pipe_list:
-	command_and_args pipe
-	;
-
-pipe:
-	PIPE pipe_list
+pipe_list :
+	pipe_list PIPE command_and_args
+	|
+	command_and_args
 	|
 	;
 command_word:
@@ -112,6 +110,8 @@ iomodifier_opt:
 
 iomodifier_list:
 	iomodifier_list iomodifier_opt
+	|
+	iomodifier_opt
 	|
 	;
 
