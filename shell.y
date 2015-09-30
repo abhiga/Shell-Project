@@ -44,7 +44,7 @@ command: simple_command
         ;
 
 simple_command:	
-	pipe_list iomodifier_opt background_optional NEWLINE {
+	pipe_list iomodifier_list background_optional NEWLINE {
 		printf("   Yacc: Execute command\n");
 		Command::_currentCommand.execute();
 	}
