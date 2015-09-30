@@ -42,6 +42,10 @@ void myunputc(int c) {
 		return GREATGREATAMPERSAND;
 		}
 
+">>"	{
+		return GREATGREAT;
+		}
+
 ">&"	{
 		return GREATAMPERSAND;
 		}

@@ -46,7 +46,8 @@
      GREATAMPERSAND = 263,
      AMPERSAND = 264,
      PIPE = 265,
-     GREATGREATAMPERSAND = 266
+     GREATGREATAMPERSAND = 266,
+     GREATGREAT = 267
    };
 #endif
 /* Tokens.  */
@@ -59,6 +60,7 @@
 #define AMPERSAND 264
 #define PIPE 265
 #define GREATGREATAMPERSAND 266
+#define GREATGREAT 267
 
 
 
@@ -75,7 +77,7 @@ typedef union YYSTYPE
 
 
 /* Line 1685 of yacc.c  */
-#line 79 "y.tab.h"
+#line 81 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
