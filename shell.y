@@ -71,10 +71,13 @@ argument:
 	       Command::_currentSimpleCommand->insertArgument( $1 );\
 	}
 	;
-pipe_list :
-	pipe_list PIPE command_and_args
+pipe_list:
+	command_and_args pipe
+	;
+
+pipe:
+	PIPE pipe_list
 	|
-	command_and_args
 	;
 command_word:
 	WORD {
