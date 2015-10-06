@@ -138,15 +138,21 @@ Command::execute()
 		prompt();
 		return;
 	}
-
+	
 	// Print contents of Command data structure
-	print();
+	//print();
 
 	// Add execution here
 	// For every simple command fork a new process
 	// Setup i/o redirection
 	// and call exec
-
+	int tempin = dup(0);
+	int tempout = dup(1);
+	int temperr = dup(2);
+	if (_inputFile) {
+	}
+	else {
+	}
 	// Clear to prepare for next command
 	clear();
 	
