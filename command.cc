@@ -146,13 +146,21 @@ Command::execute()
 	// For every simple command fork a new process
 	// Setup i/o redirection
 	// and call exec
+	
+	int ret, fdin, fdout;
+	// save stdin, stdout & stderr
 	int tempin = dup(0);
 	int tempout = dup(1);
 	int temperr = dup(2);
 	if (_inputFile) {
+		//open given file for reading
+		//fdin = open(_inputFile, O_RDONLY);
 	}
 	else {
+		//use default input
+		fdin = dup(tempin);
 	}
+	
 	// Clear to prepare for next command
 	clear();
 	
