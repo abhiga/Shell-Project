@@ -8,7 +8,7 @@
  * NOTE: You are responsible for fixing any bugs this code may have!
  *
  */
-
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -154,7 +154,7 @@ Command::execute()
 	int temperr = dup(2);
 	if (_inputFile) {
 		//open given file for reading
-		//fdin = open(_inputFile, O_RDONLY);
+		fdin = open(_inputFile, O_RDONLY);
 	}
 	else {
 		//use default input
