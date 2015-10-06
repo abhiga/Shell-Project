@@ -186,7 +186,20 @@ Command::execute()
 			fdin = fdpipe[0];
             fdout = fdpipe[1];
 		}
-			
+		dup2(fdout, 1);
+        close(fdout);
+
+		 ret = fork();
+         if (ret == 0) {
+         	execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
+            perror("execvp");
+            _exit(2);
+        }
+		else if (ret < 0) {
+            perror("fork");
+            return;
+        }
+		
 					
 	}
 	// Clear to prepare for next command
