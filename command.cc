@@ -181,6 +181,10 @@ Command::execute()
 				dup2(fdout, 2);
 		}
 		else {
+			int fdpipe[2];
+            pipe(fdpipe);
+			fdin = fdpipe[0];
+            fdout = fdpipe[1];
 		}
 			
 					
