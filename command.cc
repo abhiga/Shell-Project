@@ -8,6 +8,10 @@
  * NOTE: You are responsible for fixing any bugs this code may have!
  *
  */
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -160,7 +164,27 @@ Command::execute()
 		//use default input
 		fdin = dup(tempin);
 	}
-	
+	for (int i = 0; i < _numberOfSimpleCommands; i++) {
+		dup2(fdin, 0);
+		close(fdin);
+		if(i == _numberOfSimpleCommands - 1) {
+			if(_outFile) {
+				if(_append)
+					fdout = open(_outFile, O_RDWR | O_CREAT | O_APPEND, S_IRWXU | S_IRWXG | S_IRWXO);
+				else
+					fdout = open(_outFile, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU | S_IRWXG | S_IRWXO);
+				}
+			else 
+				fdout = dup(tempout);
+			
+			if (_errFile)
+				dup2(fdout, 2);
+		}
+		else {
+		}
+			
+					
+	}
 	// Clear to prepare for next command
 	clear();
 	
