@@ -79,7 +79,7 @@ pipe_list :
 	;
 command_word:
 	WORD {
-               printf("   Yacc: insert command \"%s\"\n", $1);
+               //printf("   Yacc: insert command \"%s\"\n", $1);
 	       
 	       Command::_currentSimpleCommand = new SimpleCommand();
 	       Command::_currentSimpleCommand->insertArgument( $1 );
@@ -100,7 +100,7 @@ iomodifier_list:
 
 iomodifier_opt:
 	GREAT WORD {
-		printf("   Yacc: insert output \"%s\"\n", $2);
+		//printf("   Yacc: insert output \"%s\"\n", $2);
 		Command::_currentCommand._outFile = $2;
 	}
 	|
