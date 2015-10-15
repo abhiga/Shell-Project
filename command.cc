@@ -200,8 +200,9 @@ Command::execute()
             return;
         }
 		
-					
+				
 	}
+	fprintf(stdout, "\n");
 	dup2(tempin, 0);
     dup2(tempout, 1);
     dup2(temperr, 2);
