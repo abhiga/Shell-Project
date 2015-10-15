@@ -202,7 +202,7 @@ Command::execute()
 		
 				
 	}
-	fprintf(stdout, "\n");
+	write(tempout, "\n",1);
 	dup2(tempin, 0);
     dup2(tempout, 1);
     dup2(temperr, 2);
