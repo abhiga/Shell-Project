@@ -193,7 +193,7 @@ Command::execute()
          if (ret == 0) {
          	execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
             perror("execvp");
-            _exit(2);
+            _exit(1);
         }
 		else if (ret < 0) {
             perror("fork");
@@ -202,7 +202,7 @@ Command::execute()
 		
 				
 	}
-	write(tempout, "\n",1);
+	//write(tempout, "\n",1);
 	dup2(tempin, 0);
     dup2(tempout, 1);
     dup2(temperr, 2);
