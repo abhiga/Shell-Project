@@ -179,9 +179,9 @@ Command::execute()
 			else 
 				fdout = dup(tempout);
 			
-			/*if (_errFile) {
+			if (_errFile) {
 				dup2(fdout, 2);
-			}*/
+			}
 		}
 		else {
 			int fdpipe[2];
