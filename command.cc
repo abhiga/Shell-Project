@@ -155,7 +155,7 @@ Command::execute()
 	// save stdin, stdout & stderr
 	int tempin = dup(0);
 	int tempout = dup(1);
-	//int temperr = dup(2);
+	int temperr = dup(2);
 	if (_inputFile) {
 		//open given file for reading
 		fdin = open(_inputFile, O_RDONLY);
@@ -169,16 +169,19 @@ Command::execute()
 		close(fdin);
 		if(i == _numberOfSimpleCommands - 1) {
 			if(_outFile) {
-				if(_append)
+				if(_append) {
 					fdout = open(_outFile, O_RDWR | O_CREAT | O_APPEND, S_IRWXU | S_IRWXG | S_IRWXO);
-				else
+				}
+				else {
 					fdout = open(_outFile, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU | S_IRWXG | S_IRWXO);
 				}
+			}
 			else 
 				fdout = dup(tempout);
 			
-			/*if (_errFile)
-				dup2(fdout, 2);*/
+			/*if (_errFile) {
+				dup2(fdout, 2);
+			}*/
 		}
 		else {
 			int fdpipe[2];
