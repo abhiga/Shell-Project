@@ -105,6 +105,9 @@ iomodifier_list:
 iomodifier_opt:
 	GREAT WORD {
 		//printf("   Yacc: insert output \"%s\"\n", $2);
+		if (Command::_currentCommand._outFile) {
+            yyerror("Ambiguous output redirect");
+        }
 		Command::_currentCommand._outFile = $2;
 	}
 	|
@@ -114,17 +117,26 @@ iomodifier_opt:
 	}
 	|
 	GREATAMPERSAND WORD {
+		if (Command::_currentCommand._outFile) {
+            yyerror("Ambiguous output redirect");
+        }
 		Command::_currentCommand._outFile = $2;
 		Command::_currentCommand._errFile = strdup($2);
 	}
 	|
 	GREATGREATAMPERSAND WORD {
+		if (Command::_currentCommand._outFile) {
+            yyerror("Ambiguous output redirect");
+        }
 		Command::_currentCommand._append = 1;
 		Command::_currentCommand._outFile = $2;
 		Command::_currentCommand._errFile = strdup($2);
 	}
 	|
 	GREATGREAT WORD {
+		if (Command::_currentCommand._outFile) {
+            yyerror("Ambiguous output redirect");
+        }
 		Command::_currentCommand._append = 1;
 		Command::_currentCommand._outFile = $2;
 	}
