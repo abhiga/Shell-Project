@@ -247,8 +247,8 @@ int yyparse(void);
 
 extern "C" void avoid_controlc( int sig )
 {	
-	Command::_currentCommand.clear();
-	//Command::_currentCommand.prompt();
+	//Command::_currentCommand.clear();
+	Command::_currentCommand.prompt();
 }
 
 main()
