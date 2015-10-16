@@ -151,7 +151,7 @@ Command::execute()
 	// Setup i/o redirection
 	// and call exec
 	
-	int ret, fdin, fdout, fderr;
+	int ret, fdin, fdout;
 	// save stdin, stdout & stderr
 	int tempin = dup(0);
 	int tempout = dup(1);
@@ -167,9 +167,6 @@ Command::execute()
 	for (int i = 0; i < _numberOfSimpleCommands; i++) {
 		dup2(fdin, 0);
 		close(fdin);
-		
-
-
 		if(i == _numberOfSimpleCommands - 1) {
 			if(_outFile) {
 				if(!_append) {
@@ -182,7 +179,9 @@ Command::execute()
 			else {
 				fdout = dup(tempout);
 			}
-	
+			if (_errFile) {
+				dup2(fdout, 2);
+			}
 		}
 		else {
 			int fdpipe[2];
@@ -190,21 +189,6 @@ Command::execute()
 			fdout = fdpipe[1];
             fdin = fdpipe[0];
 		}
-		if(i == _numberOfSimpleCommands - 1) {
-			if(_errFile) {
-				if(!_append) {
-					fderr = open(_errFile, O_RDWR | O_CREAT | O_APPEND, S_IRWXU | S_IRWXG | S_IRWXO);
-				}
-				else {
-					fderr = open(_errFile, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU | S_IRWXG | S_IRWXO);
-				}
-			}
-			else {
-				fderr = dup(temperr);
-			}
-	
-		}
-		
 		dup2(fdout, 1);
 		
         close(fdout);
