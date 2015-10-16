@@ -207,7 +207,7 @@ Command::execute()
 	}
 	dup2(tempin, 0);
     dup2(tempout, 1);
-	printf("\n\n");
+	//printf("\n\n");
     //dup2(temperr, 2);
     close(tempin);
     close(tempout);
