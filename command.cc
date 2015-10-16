@@ -251,7 +251,7 @@ extern "C" void avoid_controlc( int sig )
 
 main()
 {
-	sigset( SIGINT, avoid_controlc );
+	signal( SIGINT, avoid_controlc );
 	Command::_currentCommand.prompt();
 	yyparse();
 }
