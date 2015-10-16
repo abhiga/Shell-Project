@@ -219,9 +219,9 @@ Command::execute()
 		_exit(0);*/
 	// Clear to prepare for next command
 	clear();
-	printf("\n");
 	// Print new prompt
 	prompt();
+	printf("\n");
 }
 
 // Shell implementation
