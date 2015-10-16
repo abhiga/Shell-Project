@@ -55,6 +55,13 @@ simple_command:
 	| error NEWLINE { yyerrok; }
 	;
 
+pipe_list :
+	pipe_list PIPE command_and_args
+	|
+	command_and_args
+	|
+	;
+
 command_and_args:
 	command_word arg_list {
 		Command::_currentCommand.
@@ -74,12 +81,7 @@ argument:
 	       Command::_currentSimpleCommand->insertArgument( $1 );
 	}
 	;
-pipe_list :
-	pipe_list PIPE command_and_args
-	|
-	command_and_args
-	|
-	;
+
 command_word:
 	WORD {
                //printf("   Yacc: insert command \"%s\"\n", $1);
@@ -98,7 +100,7 @@ background_optional:
 
 iomodifier_list:
 	iomodifier_list iomodifier_opt
-|
+	|
 	;
 
 iomodifier_opt:
