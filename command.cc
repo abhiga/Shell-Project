@@ -209,15 +209,15 @@ Command::execute()
 	dup2(tempin, 0);
     dup2(tempout, 1);
 	//printf("\n");
-    //dup2(temperr, 2);
+    dup2(temperr, 2);
     close(tempin);
     close(tempout);
     close(temperr);
 	if (!_background)
         waitpid(ret, NULL, 0);
     
-	/*if (ret == -1) 
-		_exit(0);*/
+	if (ret == -1) 
+		_exit(0);
 	// Clear to prepare for next command
 	clear();
 	// Print new prompt
