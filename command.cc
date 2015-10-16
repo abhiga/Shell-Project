@@ -218,9 +218,8 @@ Command::execute()
 	/*if (ret == -1) 
 		_exit(0);*/
 	// Clear to prepare for next command
-	printf("\n");
 	clear();
-	
+	printf("\n");
 	// Print new prompt
 	prompt();
 }
