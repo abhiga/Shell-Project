@@ -220,8 +220,6 @@ Command::execute()
 	if (!_background)
         waitpid(ret, NULL, 0);
     
-	if (ret == -1) 
-		_exit(0);
 	// Clear to prepare for next command
 	clear();
 	// Print new prompt
