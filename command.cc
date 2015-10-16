@@ -246,7 +246,8 @@ SimpleCommand * Command::_currentSimpleCommand;
 int yyparse(void);
 
 extern "C" void avoid_controlc( int sig )
-{
+{	
+	Command::_currentCommand.prompt();
 }
 
 main()
