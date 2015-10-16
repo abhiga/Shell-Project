@@ -179,9 +179,9 @@ Command::execute()
 			else {
 				fdout = dup(tempout);
 			}
-			//if (_errFile) {
-				//dup2(fdout, 2);
-			//}
+			if (_errFile) {
+				dup2(fdout, 2);
+			}
 		}
 		else {
 			int fdpipe[2];
@@ -190,9 +190,7 @@ Command::execute()
             fdin = fdpipe[0];
 		}
 		dup2(fdout, 1);
-		if (_errFile) {
-				dup2(fdout, 2);
-			}
+		
         close(fdout);
 
 		 ret = fork();
