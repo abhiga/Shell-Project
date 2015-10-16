@@ -230,7 +230,9 @@ Command::execute()
 void
 Command::prompt()
 {
-	printf("myshell>");
+	if (isatty(0)) {	
+		printf("myshell>");
+	}
 	fflush(stdout);
 }
 
