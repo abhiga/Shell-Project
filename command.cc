@@ -151,7 +151,7 @@ Command::execute()
 	// Setup i/o redirection
 	// and call exec
 	
-	int ret, fdin, fdout;
+	/*int ret, fdin, fdout;
 	// save stdin, stdout & stderr
 	int tempin = dup(0);
 	int tempout = dup(1);
@@ -179,9 +179,9 @@ Command::execute()
 			else 
 				fdout = dup(tempout);
 			
-			/*if (_errFile) {
-				dup2(fdout, 2);
-			}*/
+			//if (_errFile) {
+				//dup2(fdout, 2);
+			//}
 		}
 		else {
 			int fdpipe[2];
@@ -215,7 +215,7 @@ Command::execute()
         waitpid(ret, NULL, 0);
     
 	if (ret == -1) 
-		_exit(0);
+		_exit(0);*/
 	// Clear to prepare for next command
 	clear();
 	
