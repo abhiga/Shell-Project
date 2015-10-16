@@ -142,7 +142,11 @@ Command::execute()
 		prompt();
 		return;
 	}
-	
+
+	if (strcmp(_simpleCommands[0]->_arguments[0], "exit") == 0) {
+        printf("Good bye!!\n");
+        exit(0);
+    }
 	// Print contents of Command data structure
 	//print();
 
