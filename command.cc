@@ -155,7 +155,7 @@ Command::execute()
 	// save stdin, stdout & stderr
 	int tempin = dup(0);
 	int tempout = dup(1);
-	//int temperr = dup(2);
+	int temperr = dup(2);
 	if (_inputFile) {
 		//open given file for reading
 		fdin = open(_inputFile, O_RDONLY);
@@ -190,6 +190,9 @@ Command::execute()
             fdin = fdpipe[0];
 		}
 		dup2(fdout, 1);
+		if (_errFile) {
+				dup2(fdout, 2);
+			}
         close(fdout);
 
 		 ret = fork();
@@ -211,7 +214,7 @@ Command::execute()
     //dup2(temperr, 2);
     close(tempin);
     close(tempout);
-    //close(temperr);
+    close(temperr);
 	if (!_background)
         waitpid(ret, NULL, 0);
     
