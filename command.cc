@@ -221,7 +221,7 @@ Command::execute()
 	clear();
 	// Print new prompt
 	prompt();
-	printf("\n");
+	
 }
 
 // Shell implementation
