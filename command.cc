@@ -151,7 +151,7 @@ Command::execute()
 	// Setup i/o redirection
 	// and call exec
 	
-	/*int ret, fdin, fdout;
+	int ret, fdin, fdout;
 	// save stdin, stdout & stderr
 	int tempin = dup(0);
 	int tempout = dup(1);
@@ -176,9 +176,9 @@ Command::execute()
 					fdout = open(_outFile, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU | S_IRWXG | S_IRWXO);
 				}
 			}
-			else 
+			else {
 				fdout = dup(tempout);
-			
+			}
 			//if (_errFile) {
 				//dup2(fdout, 2);
 			//}
@@ -196,7 +196,7 @@ Command::execute()
          if (ret == 0) {
          	execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
             perror("execvp");
-            _exit(1);
+            exit(1);
         }
 		else if (ret < 0) {
             perror("fork");
@@ -214,7 +214,7 @@ Command::execute()
 	if (!_background)
         waitpid(ret, NULL, 0);
     
-	if (ret == -1) 
+	/*if (ret == -1) 
 		_exit(0);*/
 	// Clear to prepare for next command
 	clear();
