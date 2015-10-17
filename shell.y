@@ -86,7 +86,8 @@ command_word:
 WORD {
 	//printf("   Yacc: insert command \"%s\"\n", $1);
 	if (!((strchr($1, '*') == NULL) && (strchr($1, '?') == NULL))) {
-		expandWildcard(NULL, $1);
+		char temp[1];
+		expandWildcard(temp, $1);
 	}
 
 	else {
@@ -155,7 +156,8 @@ GREATGREAT WORD {
 
 %%
 
-void expandWildcard(char*, char*) {
+void expandWildcard(char* , char*) {
+	
 }
 	void
 yyerror(const char * s)
