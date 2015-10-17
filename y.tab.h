@@ -72,8 +72,8 @@ typedef union YYSTYPE
 /* Line 1685 of yacc.c  */
 #line 18 "shell.y"
 
-		char   *string_val;
-	
+	char   *string_val;
+
 
 
 /* Line 1685 of yacc.c  */
