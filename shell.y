@@ -156,7 +156,20 @@ GREATGREAT WORD {
 
 %%
 
-void expandWildcard(char* , char*) {
+void expandWildcard(char* prefix, char* suffix) {
+	
+	char * reg = (char *) malloc(2 * strlen(suffix) + 10);
+	char * a = suffix;
+	char * r = reg;
+	*r = '^'; r++;
+	while (*a) {
+		if (*a == '*') { *r='.'; r++; *r='*'; r++; }
+		else if (*a == '?') { *r='.'; r++;}
+		else if (*a == '.') { *r='\\'; r++; *r='.'; r++;}
+		else { *r=*a; r++;}
+		a++;
+	}
+	*r='$'; r++; *r='\0';
 	
 }
 	void
