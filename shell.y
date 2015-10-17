@@ -155,6 +155,7 @@ GREATGREAT WORD {
 
 
 %%
+#include <regex.h>
 
 void expandWildcard(char* prefix, char* suffix) {
 	
@@ -170,7 +171,12 @@ void expandWildcard(char* prefix, char* suffix) {
 		a++;
 	}
 	*r='$'; r++; *r='\0';
-	
+	regex_t re;
+	int regexbuff = regcomp(&re, reg, REG_EXTENDED | REG_NOSUB);
+	if (regexbuff != 0) {
+        perror("regcomp");
+        return;
+    }
 }
 	void
 yyerror(const char * s)
