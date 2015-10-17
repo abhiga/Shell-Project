@@ -173,7 +173,7 @@ Command::execute()
 		close(fdin);
 		if(i == _numberOfSimpleCommands - 1) {
 			if(_outFile) {
-				if(!_append) {
+				if(_append) {
 					fdout = open(_outFile, O_RDWR | O_CREAT | O_APPEND, S_IRWXU | S_IRWXG | S_IRWXO);
 				}
 				else {
