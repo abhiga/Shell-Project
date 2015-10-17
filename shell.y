@@ -156,6 +156,7 @@ GREATGREAT WORD {
 
 %%
 #include <regex.h>
+#include <dirent.h>
 
 void expandWildcard(char* prefix, char* suffix) {
 	
@@ -177,6 +178,22 @@ void expandWildcard(char* prefix, char* suffix) {
         perror("regcomp");
         return;
     }
+	DIR * dir = opendir(".");
+	if (dir == NULL) {
+		perror("opendir");
+		return;
+	}
+	struct dirent * ent;
+	regmatch_t match;
+	int maxEntries = 20;
+	int nEntries = 0;
+	char ** filelist = (char **)malloc(maxEntries * sizeof(char*));
+	while((ent = readdir(dir))!=NULL) {
+		if(regexec(&re, ent -> d_name, 1, &match, 0) == 0) {
+			Command::_currentSimpleCommand -> insertArgument(strdup(ent -> d_name));
+		}
+	}
+	closedir(dir);
 }
 	void
 yyerror(const char * s)
