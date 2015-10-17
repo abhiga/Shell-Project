@@ -31,21 +31,21 @@ SimpleCommand::SimpleCommand()
 	_arguments = (char **) malloc( _numberOfAvailableArguments * sizeof( char * ) );
 }
 
-void
+	void
 SimpleCommand::insertArgument( char * argument )
 {
 	if ( _numberOfAvailableArguments == _numberOfArguments  + 1 ) {
 		// Double the available space
 		_numberOfAvailableArguments *= 2;
 		_arguments = (char **) realloc( _arguments,
-				  _numberOfAvailableArguments * sizeof( char * ) );
+				_numberOfAvailableArguments * sizeof( char * ) );
 	}
-	
+
 	_arguments[ _numberOfArguments ] = argument;
 
 	// Add NULL argument at the end
 	_arguments[ _numberOfArguments + 1] = NULL;
-	
+
 	_numberOfArguments++;
 }
 
@@ -64,27 +64,27 @@ Command::Command()
 	_append = 0;
 }
 
-void
+	void
 Command::insertSimpleCommand( SimpleCommand * simpleCommand )
 {
 	if ( _numberOfAvailableSimpleCommands == _numberOfSimpleCommands ) {
 		_numberOfAvailableSimpleCommands *= 2;
 		_simpleCommands = (SimpleCommand **) realloc( _simpleCommands,
-			 _numberOfAvailableSimpleCommands * sizeof( SimpleCommand * ) );
+				_numberOfAvailableSimpleCommands * sizeof( SimpleCommand * ) );
 	}
-	
+
 	_simpleCommands[ _numberOfSimpleCommands ] = simpleCommand;
 	_numberOfSimpleCommands++;
 }
 
-void
+	void
 Command:: clear()
 {
 	for ( int i = 0; i < _numberOfSimpleCommands; i++ ) {
 		for ( int j = 0; j < _simpleCommands[ i ]->_numberOfArguments; j ++ ) {
 			free ( _simpleCommands[ i ]->_arguments[ j ] );
 		}
-		
+
 		free ( _simpleCommands[ i ]->_arguments );
 		free ( _simpleCommands[ i ] );
 	}
@@ -108,7 +108,7 @@ Command:: clear()
 	_background = 0;
 }
 
-void
+	void
 Command::print()
 {
 	printf("\n\n");
@@ -116,7 +116,7 @@ Command::print()
 	printf("\n");
 	printf("  #   Simple Commands\n");
 	printf("  --- ----------------------------------------------------------\n");
-	
+
 	for ( int i = 0; i < _numberOfSimpleCommands; i++ ) {
 		printf("  %-3d ", i );
 		for ( int j = 0; j < _simpleCommands[i]->_numberOfArguments; j++ ) {
@@ -128,13 +128,13 @@ Command::print()
 	printf( "  Output       Input        Error        Background\n" );
 	printf( "  ------------ ------------ ------------ ------------\n" );
 	printf( "  %-12s %-12s %-12s %-12s\n", _outFile?_outFile:"default",
-		_inputFile?_inputFile:"default", _errFile?_errFile:"default",
-		_background?"YES":"NO");
+			_inputFile?_inputFile:"default", _errFile?_errFile:"default",
+			_background?"YES":"NO");
 	printf( "\n\n" );
-	
+
 }
 
-void
+	void
 Command::execute()
 {
 	// Don't do anything if there are no simple commands
@@ -144,9 +144,9 @@ Command::execute()
 	}
 
 	if (strcmp(_simpleCommands[0]->_arguments[0], "exit") == 0) {
-        printf("Good bye!!\n");
-        exit(0);
-    }
+		printf("Good bye!!\n");
+		exit(0);
+	}
 	// Print contents of Command data structure
 	//print();
 
@@ -154,7 +154,7 @@ Command::execute()
 	// For every simple command fork a new process
 	// Setup i/o redirection
 	// and call exec
-	
+
 	int ret, fdin, fdout;
 	// save stdin, stdout & stderr
 	int tempin = dup(0);
@@ -189,47 +189,47 @@ Command::execute()
 		}
 		else {
 			int fdpipe[2];
-            pipe(fdpipe);
+			pipe(fdpipe);
 			fdout = fdpipe[1];
-            fdin = fdpipe[0];
+			fdin = fdpipe[0];
 		}
 		dup2(fdout, 1);
-		
-        close(fdout);
 
-		 ret = fork();
-         if (ret == 0) {
-         	execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
-            perror("execvp");
-            exit(1);
-        }
+		close(fdout);
+
+		ret = fork();
+		if (ret == 0) {
+			execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
+			perror("execvp");
+			exit(1);
+		}
 		else if (ret < 0) {
-            perror("fork");
-            return;
-        }
-		
-				
+			perror("fork");
+			return;
+		}
+
+
 	}
 	dup2(tempin, 0);
-    dup2(tempout, 1);
+	dup2(tempout, 1);
 	//printf("\n");
-    dup2(temperr, 2);
-    close(tempin);
-    close(tempout);
-    close(temperr);
+	dup2(temperr, 2);
+	close(tempin);
+	close(tempout);
+	close(temperr);
 	if (!_background)
-        waitpid(ret, NULL, 0);
-    
+		waitpid(ret, NULL, 0);
+
 	// Clear to prepare for next command
 	clear();
 	// Print new prompt
 	prompt();
-	
+
 }
 
 // Shell implementation
 
-void
+	void
 Command::prompt()
 {
 	if (isatty(0)) {	
