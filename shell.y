@@ -20,6 +20,7 @@
 }
 
 %{
+void expandWildcard(char*, char*);
 	//#define yylex yylex
 #include <stdio.h>
 #include <string.h>
@@ -85,6 +86,7 @@ command_word:
 WORD {
 	//printf("   Yacc: insert command \"%s\"\n", $1);
 	if (!((strchr($1, '*') == NULL) && (strchr($1, '?') == NULL))) {
+		expandWildcard(NULL, $1);
 	}
 
 	else {
@@ -153,6 +155,8 @@ GREATGREAT WORD {
 
 %%
 
+void expandWildcard(char*, char*) {
+}
 	void
 yyerror(const char * s)
 {
