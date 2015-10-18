@@ -271,7 +271,7 @@ void expandWildcard(char* prefix, char* suffix) {
 }
 void expandWildcardsifNecessary(char * tmp) {
 		char temp[1];
-		temp[0] = '\0';
+		//temp[0] = '\0';
 		expandWildcard(temp, tmp);
 		free(array);
 	}
