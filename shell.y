@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "command.h"
+#include <pwd.h>
 	char **array;
 	void checkThenInsert(char *);
 	void expandTilde(char *);
@@ -161,9 +162,14 @@ GREATGREAT WORD {
 #include <dirent.h>
 
 void checkThenInsert(char * temp) {
+	if(*temp == '~') 
+		expandTilde(temp);
 Command::_currentSimpleCommand->insertArgument( temp );
 }
 void expandTilde(char * temp){
+	if ((strcmp(temp, "~") == 0) || (strcmp(temp, "~/") == 0)) {
+        strcpy(temp, getpwnam(getenv("USER"))->pw_dir);
+    } 
 }
 void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) 
