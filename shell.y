@@ -226,7 +226,6 @@ void expandWildcard(char* prefix, char* suffix) {
 		perror("opendir");
 		return;
 	}
-	fprintf(stdout,"abhiga\n");
 	regmatch_t match;
 	struct dirent * ent;
 	int maxEntries = 20;
@@ -244,6 +243,7 @@ void expandWildcard(char* prefix, char* suffix) {
                 sprintf(newPrefix, "%s/%s", prefix, strdup(ent->d_name));
             }
 			expandWildcard(strdup(newPrefix), strdup(suffix));
+			fprintf(stdout,"abhiga\n");
 			if (nEntries >= maxEntries) {
                 maxEntries = maxEntries + maxEntries;
                 array = (char **)realloc(array, maxEntries * sizeof(char *));
