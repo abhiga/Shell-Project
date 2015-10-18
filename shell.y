@@ -90,6 +90,8 @@ WORD {
 	if (strchr($1, '*') == NULL && strchr($1, '?') == NULL) {
 		Command::_currentSimpleCommand = new SimpleCommand();
 		Command::_currentSimpleCommand->insertArgument( $1 );
+		fprintf(stderr,"abhigas\n");
+		
 	}
 
 	else {
