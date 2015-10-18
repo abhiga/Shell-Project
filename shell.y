@@ -243,7 +243,7 @@ void expandWildcard(char* prefix, char* suffix) {
                 sprintf(newPrefix, "%s/%s", prefix, strdup(ent->d_name));
             }
 			expandWildcard(strdup(newPrefix), strdup(suffix));
-			if (nEntries == maxEntries) {
+			if (nEntries >= maxEntries) {
                 maxEntries = 2 * maxEntries;
                 array = (char **)realloc(array, maxEntries * sizeof(char *));
             }
