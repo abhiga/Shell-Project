@@ -27,6 +27,7 @@
 #include "command.h"
 #include <pwd.h>
 	char **array;
+	void expandEnv(char*);
 	void checkThenInsert(char *);
 	void expandTilde(char *);
 	void expandWildcardsifNecessary(char *);
@@ -164,6 +165,8 @@ GREATGREAT WORD {
 void checkThenInsert(char * temp) {
 	if(*temp == '~') 
 		expandTilde(temp);
+	if(*temp == '$')
+		expandEnv(temp);
 Command::_currentSimpleCommand->insertArgument( temp );
 }
 void expandTilde(char * temp){
@@ -291,6 +294,8 @@ void expandWildcardsifNecessary(char * tmp) {
 		char temp[1];
 		expandWildcard(temp, tmp);
 		free(array);
+}
+void expandEnv(char* temp) {
 }
 
 	void
