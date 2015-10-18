@@ -95,6 +95,7 @@ WORD {
 	}
 
 	else {
+		fprintf(stderr,"abhiga\n");
 		Command::_currentSimpleCommand = new SimpleCommand();
 		Command::_currentSimpleCommand->insertArgument( $1 );
 	}	
