@@ -163,15 +163,15 @@ void tilde(){
 void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) 
         return;
-    char * s = strchr(suffix, '/');
+    char * sub = strchr(suffix, '/');
     char component[1024];
-    if (s != NULL) {
-        if ((s - suffix) < 1) 
+    if (sub != NULL) {
+        if ((sub - suffix) < 1) 
             component[0] = '\0';
         else 
-            strncpy(component, suffix, s - suffix);
+            strncpy(component, suffix, sub - suffix);
         
-        suffix = s + 1;
+        suffix = sub + 1;
     } 
 	else {
      	strcpy(component, suffix);
