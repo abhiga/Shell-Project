@@ -89,6 +89,7 @@ WORD {
 		char temp[1];
 		temp[0] = '\0';
 		expandWildcard(temp, $1);
+		free(array);
 	}
 }
 ;
@@ -270,7 +271,6 @@ void expandWildcard(char* prefix, char* suffix) {
 	//sortArr(array, nEntries);
 	for (int i = 0; i < nEntries; i++) 
         Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
-		array = NULL;
 	closedir(dir);
 }
 void sortArr(char **&array, int num) {
