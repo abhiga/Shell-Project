@@ -228,7 +228,7 @@ void expandWildcard(char* prefix, char* suffix) {
 	}
 	regmatch_t match;
 	struct dirent * ent;
-	int maxEntries = 100;
+	int maxEntries = 20;
 	int nEntries = 0;
 	array = (char **)malloc(maxEntries * sizeof(char*));
 	while((ent = readdir(dir))!=NULL) {
