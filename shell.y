@@ -259,7 +259,6 @@ void expandWildcard(char* prefix, char* suffix) {
 		
 		}
 	}
-	fprintf(stdout,"abhiga\n");
 	for (int i = 0; i < nEntries; i++) {
 		for (int j = 0; j < nEntries-1; j++) {
 			if (strcmp(array[i], array[i + 1]) > 0) {
@@ -269,6 +268,7 @@ void expandWildcard(char* prefix, char* suffix) {
 			}
 		}
 	}
+	fprintf(stdout,"abhiga\n");
 	//sortArr(array, nEntries);
 	for (int i = 0; i < nEntries; i++) 
         Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
