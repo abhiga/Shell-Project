@@ -233,7 +233,8 @@ void expandWildcard(char* prefix, char* suffix) {
 		if(regexec(&re, ent -> d_name, 1, &match, 0) == 0) {
 			if (strlen(prefix) == 0) {
                 sprintf(newPrefix, "%s", strdup(ent->d_name));
-            } else if (strlen(prefix) == 1 && *prefix == '/') {
+            } 
+			else if (strlen(prefix) == 1 && *prefix == '/') {
                 sprintf(newPrefix, "/%s", strdup(ent->d_name));
             } 
             else {
