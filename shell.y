@@ -26,7 +26,8 @@
 #include <string.h>
 #include "command.h"
 	char **array;
-	void tilde();
+	void checkThenInsert(char *);
+	void expandTilde(char *);
 	void expandWildcardsifNecessary(char *);
 	void expandWildcard(char*, char*);
 	void yyerror(const char * s);
@@ -85,8 +86,8 @@ WORD {
 		expandWildcardsifNecessary($1);
 	}
 
-	else 
-		Command::_currentSimpleCommand->insertArgument( $1 );
+	else
+		checkThenInsert($1);
 }
 ;
 
@@ -158,7 +159,11 @@ GREATGREAT WORD {
 %%
 #include <regex.h>
 #include <dirent.h>
-void tilde(){
+
+void checkThenInsert(char * temp) {
+Command::_currentSimpleCommand->insertArgument( temp );
+}
+void expandTilde(char * temp){
 }
 void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) 
@@ -271,10 +276,9 @@ void expandWildcard(char* prefix, char* suffix) {
 }
 void expandWildcardsifNecessary(char * tmp) {
 		char temp[1];
-		//temp[0] = '\0';
 		expandWildcard(temp, tmp);
 		free(array);
-	}
+}
 
 	void
 yyerror(const char * s)
