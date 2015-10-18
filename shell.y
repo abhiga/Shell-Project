@@ -20,6 +20,7 @@
 }
 
 %{
+void sortArray(char **, int);
 void expandWildcard(char*, char*);
 	//#define yylex yylex
 #include <stdio.h>
@@ -216,12 +217,21 @@ void expandWildcard(char* prefix, char* suffix) {
 	char ** array = (char **)malloc(maxEntries * sizeof(char*));
 	while((ent = readdir(dir))!=NULL) {
 		if(regexec(&re, ent -> d_name, 1, &match, 0) == 0) {
-			sprintf(newPrefix, "%s", prefix, strdup(ent->d_name));
+			if (strlen(prefix) == 0) {
+                sprintf(newPrefix, "%s", strdup(ent->d_name));
+            } else if (strlen(prefix) == 1 && *prefix == '/') {
+                sprintf(newPrefix, "/%s", strdup(ent->d_name));
+            } 
+            else {
+                sprintf(newPrefix, "%s/%s", prefix, strdup(ent->d_name));
+            }
 			
 		}
 		expandWildcard(strdup(newPrefix), strdup(suffix));
 	}
 	closedir(dir);
+}
+void sortArray(char **&array, int num) {
 }
 	void
 yyerror(const char * s)
