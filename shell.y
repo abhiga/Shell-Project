@@ -27,6 +27,7 @@
 #include "command.h"
 	char **array;
 	void tilde();
+	void expandWildcardsifNecessary(char *);
 	void expandWildcard(char*, char*);
 	void yyerror(const char * s);
 	int yylex();
@@ -81,10 +82,7 @@ argument:
 WORD {
 	//printf("   Yacc: insert argument \"%s\"\n", $1);
 	if (!(strchr($1, '*') == NULL && strchr($1, '?') == NULL)) {
-		char temp[1];
-		temp[0] = '\0';
-		expandWildcard(temp, $1);
-		free(array);
+		expandWildcardsifNecessary($1);
 	}
 
 	else 
@@ -271,6 +269,12 @@ void expandWildcard(char* prefix, char* suffix) {
         Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
 	closedir(dir);
 }
+void expandWildcardsifNecessary(char * tmp) {
+		char temp[1];
+		temp[0] = '\0';
+		expandWildcard(temp, tmp);
+		free(array);
+	}
 
 	void
 yyerror(const char * s)
