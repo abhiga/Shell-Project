@@ -87,17 +87,16 @@ WORD {
 command_word:
 WORD {
 	//printf("   Yacc: insert command \"%s\"\n", $1);
-	if (!((strchr($1, '*') == NULL) && (strchr($1, '?') == NULL))) {
+	if (strchr($1, '*') == NULL && strchr($1, '?') == NULL) {
+		Command::_currentSimpleCommand = new SimpleCommand();
+		Command::_currentSimpleCommand->insertArgument( $1 );
+	}
+
+	else {
 		char temp[1];
 		temp[0] = '\0';
 		fprintf(stderr,"abhiga\n");
 		expandWildcard(temp, $1);
-	}
-
-	else {
-		fprintf(stderr,"abhiga\n");
-		Command::_currentSimpleCommand = new SimpleCommand();
-		Command::_currentSimpleCommand->insertArgument( $1 );
 	}	
 }
 ;
