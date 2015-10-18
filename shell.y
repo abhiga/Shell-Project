@@ -167,7 +167,6 @@ void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) {
         return;
     }
-	fprintf(stdout,"abhiga\n");
     char * s = strchr(suffix, '/');
     char component[1024];
     if (s != NULL) {
@@ -227,6 +226,7 @@ void expandWildcard(char* prefix, char* suffix) {
 		perror("opendir");
 		return;
 	}
+	fprintf(stdout,"abhiga\n");
 	regmatch_t match;
 	struct dirent * ent;
 	int maxEntries = 20;
