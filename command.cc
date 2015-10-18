@@ -204,12 +204,9 @@ Command::execute()
 		else if (strcmp(_simpleCommands[0]->_arguments[0], "cd") == 0) {
             if (_simpleCommands[0]->_arguments[1] == NULL)
                 chdir(getenv("HOME"));
-            else {
-                if (chdir(_simpleCommands[0]->_arguments[1]) < 0) 
+            else if (chdir(_simpleCommands[0]->_arguments[1]) < 0) 
                     perror("chdir");
-                
-            }
-		}
+   		}
 		else {
 		ret = fork();
 		if (ret == 0) {
