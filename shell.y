@@ -167,6 +167,7 @@ void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) {
         return;
     }
+	fprintf(stdout,"abhiga\n");
     char * s = strchr(suffix, '/');
     char component[1024];
     if (s != NULL) {
