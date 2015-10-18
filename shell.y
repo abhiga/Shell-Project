@@ -82,7 +82,7 @@ WORD {
 	//printf("   Yacc: insert argument \"%s\"\n", $1);
 	if (!(strchr($1, '*') == NULL && strchr($1, '?') == NULL)) {
 		char temp[1];
-		temp[0] = '\0';
+		//temp[0] = '\0';
 		expandWildcard(temp, $1);
 		free(array);
 	}
