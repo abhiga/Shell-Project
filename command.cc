@@ -249,10 +249,15 @@ extern "C" void avoid_controlc( int sig )
 	fprintf(stdout,"\n");
 	Command::_currentCommand.prompt();
 }
+void avoid_zombiep(int sig) {
+    while (waitpid((pid_t)(-1), 0, WNOHANG) > 0) {}   
+}
 
 main()
 {
 	signal( SIGINT, avoid_controlc );
+	signal(SIGCHLD, avoid_zombiep);
+
 	Command::_currentCommand.prompt();
 	yyparse();
 }
