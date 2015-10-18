@@ -243,7 +243,6 @@ void expandWildcard(char* prefix, char* suffix) {
                 sprintf(newPrefix, "%s/%s", prefix, strdup(ent->d_name));
             }
 			expandWildcard(strdup(newPrefix), strdup(suffix));
-			fprintf(stdout,"abhiga\n");
 			if (nEntries >= maxEntries) {
                 maxEntries = maxEntries + maxEntries;
                 array = (char **)realloc(array, maxEntries * sizeof(char *));
@@ -260,6 +259,7 @@ void expandWildcard(char* prefix, char* suffix) {
 		
 		}
 	}
+	fprintf(stdout,"abhiga\n");
 	for (int i = 0; i < nEntries; i++) {
 		for (int j = 0; j < nEntries-1; j++) {
 			if (strcmp(array[i], array[i + 1]) > 0) {
