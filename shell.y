@@ -173,7 +173,8 @@ void expandWildcard(char* prefix, char* suffix) {
             strncpy(component, suffix, s - suffix);
         
         suffix = s + 1;
-    } else {
+    } 
+	else {
      	strcpy(component, suffix);
         suffix = suffix + strlen(suffix);
     }
@@ -182,7 +183,8 @@ void expandWildcard(char* prefix, char* suffix) {
     if ((strchr(component, '*') == NULL) && (strchr(component, '?') == NULL)) {
         if (strlen(prefix) == 1 && *prefix == '/') {
             sprintf(newPrefix, "/%s", component);
-        } else {
+        } 
+		else {
             sprintf(newPrefix, "%s/%s", prefix, component);
         }
         expandWildcard(strdup(newPrefix), strdup(suffix));
@@ -206,7 +208,17 @@ void expandWildcard(char* prefix, char* suffix) {
         perror("regcomp");
         return;
     }
-	DIR * dir = opendir(".");
+	char * dr;
+	if (prefix[0] == 0) {
+        dr = (char *)malloc(sizeof(char) * 2);
+        dr[0] = '.';
+        dr[1] = '\0';
+    } 
+	else {
+        dr = strdup(prefix);
+    }
+
+	DIR * dir = opendir(dr);
 	if (dir == NULL) {
 		perror("opendir");
 		return;
