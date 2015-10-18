@@ -267,7 +267,7 @@ void avoid_zombiep(int sig) {
 
 main()
 {
-	signal( SIGINT, avoid_controlc );
+	signal(SIGINT, avoid_controlc );
 	signal(SIGCHLD, avoid_zombiep);
 
 	Command::_currentCommand.prompt();

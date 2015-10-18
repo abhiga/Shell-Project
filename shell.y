@@ -26,6 +26,7 @@
 #include <string.h>
 #include "command.h"
 	char **array;
+	void tilde();
 	void expandWildcard(char*, char*);
 	void yyerror(const char * s);
 	int yylex();
@@ -159,7 +160,8 @@ GREATGREAT WORD {
 %%
 #include <regex.h>
 #include <dirent.h>
-
+void tilde(){
+}
 void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) 
         return;
