@@ -196,7 +196,10 @@ Command::execute()
 		dup2(fdout, 1);
 
 		close(fdout);
-
+		
+		if (strcmp(_simpleCommands[0]->_arguments[0], "setenv") == 0) 
+            setenv(_simpleCommands[0]->_arguments[1], _simpleCommands[0]->_arguments[2], 1);
+		else {
 		ret = fork();
 		if (ret == 0) {
 			execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
@@ -206,6 +209,7 @@ Command::execute()
 		else if (ret < 0) {
 			perror("fork");
 			return;
+		}
 		}
 
 
