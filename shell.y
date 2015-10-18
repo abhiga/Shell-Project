@@ -244,7 +244,7 @@ void expandWildcard(char* prefix, char* suffix) {
             }
 			expandWildcard(strdup(newPrefix), strdup(suffix));
 			if (nEntries >= maxEntries) {
-                maxEntries = 2 * maxEntries;
+                maxEntries = maxEntries + maxEntries;
                 array = (char **)realloc(array, maxEntries * sizeof(char *));
             }
 			if (*ent->d_name == '.') {
