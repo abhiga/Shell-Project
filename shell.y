@@ -232,6 +232,15 @@ void expandWildcard(char* prefix, char* suffix) {
 	closedir(dir);
 }
 void sortArray(char **&array, int num) {
+	for (int i = 0; i < num; i++) {
+		for (int j = 0; j < num-1; j++) {
+			if (strcmp(array[i], array[i + 1]) > 0) {
+                char * tmp = array[i + 1];
+                array[i + 1] = array[i];
+                array[i] = tmp;
+			}
+		}
+	}
 }
 	void
 yyerror(const char * s)
