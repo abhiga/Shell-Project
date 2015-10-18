@@ -83,7 +83,7 @@ WORD {
 	if (!(strchr($1, '*') == NULL && strchr($1, '?') == NULL)) {
 		char temp[1];
 		//temp[0] = '\0';
-		expandWildcard(temp, $1);
+		expandWildcard(NULL, $1);
 		free(array);
 	}
 
