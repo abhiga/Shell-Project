@@ -219,7 +219,7 @@ void expandWildcard(char* prefix, char* suffix) {
 
 	DIR * dir = opendir(dr);
 	if (dir == NULL) {
-		perror("opendir");
+		//perror("opendir");
 		return;
 	}
 	regmatch_t match;
