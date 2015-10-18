@@ -167,10 +167,16 @@ void checkThenInsert(char * temp) {
 Command::_currentSimpleCommand->insertArgument( temp );
 }
 void expandTilde(char * temp){
-	if ((strcmp(temp, "~") == 0) || (strcmp(temp, "~/") == 0)) {
+	if ((strcmp(temp, "~") == 0) || (strcmp(temp, "~/") == 0)) 
         strcpy(temp, getpwnam(getenv("USER"))->pw_dir);
-    } 
-}
+    else {
+		char newTemp[strlen(temp) + 10];
+		strcpy(newTemp, "/homes/");
+		temp++;
+		strcat(newTemp,temp);
+		strcpy(temp,newTemp);
+	} 
+} 
 void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) 
         return;
