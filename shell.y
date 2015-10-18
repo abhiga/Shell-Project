@@ -25,11 +25,12 @@
 #include <stdio.h>
 #include <string.h>
 #include "command.h"
+	char **array;
 	void sortArr(char **, int);
 	void expandWildcard(char*, char*);
 	void yyerror(const char * s);
 	int yylex();
-
+	void reset();
 	%}
 
 	%%
@@ -228,7 +229,7 @@ void expandWildcard(char* prefix, char* suffix) {
 	struct dirent * ent;
 	int maxEntries = 100;
 	int nEntries = 0;
-	char ** array = (char **)malloc(maxEntries * sizeof(char*));
+	array = (char **)malloc(maxEntries * sizeof(char*));
 	while((ent = readdir(dir))!=NULL) {
 		if(regexec(&re, ent -> d_name, 1, &match, 0) == 0) {
 			if (strlen(prefix) == 0) {
@@ -269,6 +270,7 @@ void expandWildcard(char* prefix, char* suffix) {
 	//sortArr(array, nEntries);
 	for (int i = 0; i < nEntries; i++) 
         Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
+		array = NULL;
 	closedir(dir);
 }
 void sortArr(char **&array, int num) {
