@@ -261,14 +261,13 @@ void expandWildcard(char* prefix, char* suffix) {
 	}
 	for (int i = 0; i < nEntries; i++) {
 		for (int j = 0; j < nEntries-1; j++) {
-			if (strcmp(array[i], array[i + 1]) > 0) {
-                char * tmp = array[i + 1];
-                array[i + 1] = array[i];
-                array[i] = tmp;
+			if (strcmp(array[j], array[j + 1]) > 0) {
+                char * tmp = array[j + 1];
+                array[j + 1] = array[j];
+                array[j] = tmp;
 			}
 		}
 	}
-	fprintf(stdout,"abhiga\n");
 	//sortArr(array, nEntries);
 	for (int i = 0; i < nEntries; i++) 
         Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
