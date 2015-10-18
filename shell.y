@@ -257,6 +257,7 @@ void expandWildcard(char* prefix, char* suffix) {
 		
 		}
 	}
+	fprintf(stderr,"abhiga\n");
 	//sortArr(array, nEntries);
 	for (int i = 0; i < nEntries; i++) 
         Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
