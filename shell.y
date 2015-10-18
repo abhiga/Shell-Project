@@ -90,6 +90,7 @@ WORD {
 	if (!((strchr($1, '*') == NULL) && (strchr($1, '?') == NULL))) {
 		char temp[1];
 		temp[0] = '\0';
+		fprintf(stderr,"abhiga\n");
 		expandWildcard(temp, $1);
 	}
 
