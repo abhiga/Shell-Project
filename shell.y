@@ -20,12 +20,13 @@
 }
 
 %{
-void sortArray(char **, int);
-void expandWildcard(char*, char*);
+
 	//#define yylex yylex
 #include <stdio.h>
 #include <string.h>
 #include "command.h"
+	void sortArr(char **, int);
+	void expandWildcard(char*, char*);
 	void yyerror(const char * s);
 	int yylex();
 
@@ -225,13 +226,25 @@ void expandWildcard(char* prefix, char* suffix) {
             else {
                 sprintf(newPrefix, "%s/%s", prefix, strdup(ent->d_name));
             }
-			
+			expandWildcard(strdup(newPrefix), strdup(suffix));
+			if (*ent->d_name == '.') {
+                if (*component == '.') 
+                    array[nEntries++] = strdup(ent->d_name);
+                
+            } 
+			else {
+                if (strlen(suffix) ==0) 
+                    array[nEntries++] = strdup(newPrefix);
+			}
+		
 		}
-		expandWildcard(strdup(newPrefix), strdup(suffix));
 	}
+	//sortArr(array, nEntries);
+	for (int i = 0; i < nEntries; i++) 
+        Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
 	closedir(dir);
 }
-void sortArray(char **&array, int num) {
+void sortArr(char **&array, int num) {
 	for (int i = 0; i < num; i++) {
 		for (int j = 0; j < num-1; j++) {
 			if (strcmp(array[i], array[i + 1]) > 0) {
