@@ -199,6 +199,8 @@ Command::execute()
 		
 		if (strcmp(_simpleCommands[0]->_arguments[0], "setenv") == 0) 
             setenv(_simpleCommands[0]->_arguments[1], _simpleCommands[0]->_arguments[2], 1);
+		else if(strcmp(_simpleCommands[0]->_arguments[0], "unsetenv") == 0) 
+            unsetenv(_simpleCommands[0]->_arguments[1]);
 		else {
 		ret = fork();
 		if (ret == 0) {
