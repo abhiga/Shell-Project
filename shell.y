@@ -159,9 +159,35 @@ GREATGREAT WORD {
 #include <dirent.h>
 
 void expandWildcard(char* prefix, char* suffix) {
-	
-	char * reg = (char *) malloc(2 * strlen(suffix) + 10);
-	char * a = suffix;
+	if (suffix[0] == 0) {
+        return;
+    }
+    char * s = strchr(suffix, '/');
+    char component[1024];
+    if (s != NULL) {
+        if ((s - suffix) < 1) 
+            component[0] = '\0';
+        else 
+            strncpy(component, suffix, s - suffix);
+        
+        suffix = s + 1;
+    } else {
+     	strcpy(component, suffix);
+        suffix = suffix + strlen(suffix);
+    }
+
+    char newPrefix[1024];
+    if ((strchr(component, '*') == NULL) && (strchr(component, '?') == NULL)) {
+        if (strlen(prefix) == 1 && *prefix == '/') {
+            sprintf(newPrefix, "/%s", component);
+        } else {
+            sprintf(newPrefix, "%s/%s", prefix, component);
+        }
+        expandWildcard(strdup(newPrefix), strdup(suffix));
+        return;
+    }
+	char * reg = (char *) malloc(2 * strlen(component) + 10);
+	char * a = component;
 	char * r = reg;
 	*r = '^'; r++;
 	while (*a) {
@@ -183,15 +209,17 @@ void expandWildcard(char* prefix, char* suffix) {
 		perror("opendir");
 		return;
 	}
-	struct dirent * ent;
 	regmatch_t match;
+	struct dirent * ent;
 	int maxEntries = 20;
 	int nEntries = 0;
-	char ** filelist = (char **)malloc(maxEntries * sizeof(char*));
+	char ** array = (char **)malloc(maxEntries * sizeof(char*));
 	while((ent = readdir(dir))!=NULL) {
 		if(regexec(&re, ent -> d_name, 1, &match, 0) == 0) {
-			Command::_currentSimpleCommand -> insertArgument(strdup(ent -> d_name));
+			sprintf(newPrefix, "%s", prefix, strdup(ent->d_name));
+			
 		}
+		expandWildcard(strdup(newPrefix), strdup(suffix));
 	}
 	closedir(dir);
 }
