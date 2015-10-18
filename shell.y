@@ -88,7 +88,7 @@ command_word:
 WORD {
 	//printf("   Yacc: insert command \"%s\"\n", $1);
 	if (strchr($1, '*') == NULL && strchr($1, '?') == NULL) {
-		Command::_currentSimpleCommand = new SimpleCommand();
+		//Command::_currentSimpleCommand = new SimpleCommand();
 		Command::_currentSimpleCommand->insertArgument( $1 );
 	}
 
