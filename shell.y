@@ -172,8 +172,9 @@ void expandTilde(char * temp){
     else {
 		char newTemp[strlen(temp) + 10];
 		strcpy(newTemp, "/homes/");
-		temp++;
-		strcat(newTemp,temp);
+		char *shiftTemp = temp;
+		shiftTemp++;
+		strcat(newTemp,shiftTemp);
 		strcpy(temp,newTemp);
 	} 
 } 
