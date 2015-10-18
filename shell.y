@@ -255,6 +255,7 @@ void expandWildcard(char* prefix, char* suffix) {
 		
 		}
 	}
+	//sort
 	for (int i = 0; i < nEntries; i++) {
 		for (int j = 0; j < nEntries-1; j++) {
 			if (strcmp(array[j], array[j + 1]) > 0) {
