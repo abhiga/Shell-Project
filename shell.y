@@ -26,7 +26,6 @@
 #include <string.h>
 #include "command.h"
 	char **array;
-	void sortArr(char **, int);
 	void expandWildcard(char*, char*);
 	void yyerror(const char * s);
 	int yylex();
@@ -80,17 +79,15 @@ arg_list argument
 argument:
 WORD {
 	//printf("   Yacc: insert argument \"%s\"\n", $1);
-	if (strchr($1, '*') == NULL && strchr($1, '?') == NULL) {
-		Command::_currentSimpleCommand->insertArgument( $1 );
-		
-	}
-
-	else {
+	if (!(strchr($1, '*') == NULL && strchr($1, '?') == NULL)) {
 		char temp[1];
 		temp[0] = '\0';
 		expandWildcard(temp, $1);
 		free(array);
 	}
+
+	else 
+		Command::_currentSimpleCommand->insertArgument( $1 );
 }
 ;
 
@@ -164,9 +161,8 @@ GREATGREAT WORD {
 #include <dirent.h>
 
 void expandWildcard(char* prefix, char* suffix) {
-	if (suffix[0] == 0) {
+	if (suffix[0] == 0) 
         return;
-    }
     char * s = strchr(suffix, '/');
     char component[1024];
     if (s != NULL) {
@@ -268,22 +264,11 @@ void expandWildcard(char* prefix, char* suffix) {
 			}
 		}
 	}
-	//sortArr(array, nEntries);
 	for (int i = 0; i < nEntries; i++) 
         Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
 	closedir(dir);
 }
-void sortArr(char **&array, int num) {
-	for (int i = 0; i < num; i++) {
-		for (int j = 0; j < num-1; j++) {
-			if (strcmp(array[i], array[i + 1]) > 0) {
-                char * tmp = array[i + 1];
-                array[i + 1] = array[i];
-                array[i] = tmp;
-			}
-		}
-	}
-}
+
 	void
 yyerror(const char * s)
 {
