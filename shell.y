@@ -296,7 +296,16 @@ void expandWildcardsifNecessary(char * tmp) {
 		free(array);
 }
 void expandEnv(char* temp) {
+	char * tomatch = "\\${.*}";
+	regex_t re;
+	regmatch_t match;
+	int regexbuff = regcomp(&re, tomatch, REG_EXTENDED | REG_NOSUB);
+	if (regexbuff != 0) {
+        perror("regcomp");
+        return;
+    }
 }
+		
 
 	void
 yyerror(const char * s)
