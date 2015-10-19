@@ -304,6 +304,9 @@ void expandEnv(char* temp) {
         perror("regcomp");
         return;
     }
+	if(regexec(&re, temp, 1, &match, 0) == 0) {
+	}
+		
 }
 		
 
