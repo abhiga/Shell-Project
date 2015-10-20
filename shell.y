@@ -299,7 +299,7 @@ void expandEnv(char* temp) {
 	char * tomatch = "\\${.*}";
 	regex_t re;
 	regmatch_t match;
-	int regexbuff = regcomp(&re, tomatch, REG_EXTENDED | REG_NOSUB);
+	int regexbuff = regcomp(&re, tomatch, 0);
 	if (regexbuff != 0) {
         perror("regcomp");
         return;
