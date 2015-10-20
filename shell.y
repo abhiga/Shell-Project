@@ -327,9 +327,9 @@ void expandEnv(char* temp) {
 				strncat(out, beg + 1, last - beg - 1);
 				char * final = getenv(out);
 				if(final!=NULL)
-					fprintf(stderr,"abhiga\n");
 					strcat (expArg, final);
 				i = i + strlen(out) + 3;
+				fprintf(stderr,"abhiga\n");
 				temp2 = strlen(final) + temp2;
 			}
 		temp = strdup(expArg);
