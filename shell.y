@@ -322,10 +322,10 @@ void expandEnv(char* temp) {
 				memset[out, strlen(temp)];
 				strncat(out, beg + 1, last - beg - 1);
 				char * final = getenv(out);
-				strcat (expArg, final);
+				if(final!=NULL)
+					strcat (expArg, final);
 				i = i + strlen(out) + 3;
 				temp2 = strlen(final) + temp2;
-				fprintf(stderr,"abhiga");
 			}
 		fprintf(stderr,"%s\n", expArg);
 		temp = strdup(expArg);
