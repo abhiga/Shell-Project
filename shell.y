@@ -320,13 +320,13 @@ void expandEnv(char* temp) {
 				i++;
 			}
 			else {
-				fprintf(stderr,"abhiga\n");
 				char *beg = strchr((char *)(temp + i), '{');
 				char *last = strchr((char *)(temp + i), '}');
 				char out[strlen(temp)];
 				memset[out, strlen(temp)];
 				strncat(out, beg + 1, last - beg - 1);
 				char * final = getenv(out);
+				fprintf(stderr,"abhiga\n");
 				if(final!=NULL)
 					strcat (expArg, final);
 				i = i + strlen(out) + 3;
