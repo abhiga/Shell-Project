@@ -326,6 +326,7 @@ void expandEnv(char* temp) {
 				char out[strlen(temp)];
 				memset[out, strlen(temp)];
 				strncat(out, beg + 1, last - beg - 1);
+				fprintf(stderr,"%s\n", out);
 				char * final = getenv(out);
 				if(final!=NULL)
 					strcat (expArg, final);
