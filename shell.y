@@ -317,6 +317,7 @@ void expandEnv(char* temp) {
 				temp3++;
 				temp2++;
 				i++;
+			fprintf(stderr,"abhiga\n");
 			}
 			else {
 				char *beg = strchr((char *)(temp + i), '{');
@@ -330,7 +331,6 @@ void expandEnv(char* temp) {
 				i = i + strlen(out) + 3;
 				temp2 = strlen(final) + temp2;
 			}
-		fprintf(stderr,"%s\n", expArg);
 		temp = strdup(expArg);
 		}
 	}
