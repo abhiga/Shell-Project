@@ -310,6 +310,7 @@ void expandEnv(char* temp) {
 		char * temp2 = expArg;
 		char * temp3 = temp2 + 1;
 		int i = 0;
+		fprintf(stderr,"abhiga\n");
 		while(temp[i]!='\0' && i < 1024) {
 			if (temp[i] != '$') {
 				*temp2 = temp [i];
@@ -317,7 +318,6 @@ void expandEnv(char* temp) {
 				temp3++;
 				temp2++;
 				i++;
-			fprintf(stderr,"abhiga\n");
 			}
 			else {
 				char *beg = strchr((char *)(temp + i), '{');
