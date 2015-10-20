@@ -331,10 +331,10 @@ void expandEnv(char* temp) {
 				strncat(out, beg + 1, last - beg - 1);
 				char *out1 = strdup(beg);
 				fprintf(stderr,"%s\n", out1);
-				char * final = getenv(out);
+				char * final = getenv(out1);
 				if(final!=NULL)
 					strcat (expArg, final);
-				i = i + strlen(out) + 3;
+				i = i + strlen(out1) + 3;
 				j = strlen(final) + j;
 			}
 		temp = strdup(expArg);
