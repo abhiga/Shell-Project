@@ -304,6 +304,7 @@ void expandEnv(char* temp) {
         perror("regcomp");
         return;
     }
+	fprintf(stderr,"abhiga");
 	if(regexec(&re, temp, 1, &match, 0) == 0) {
 		char expArg[1024];
 		memset(expArg, 0, 1024);
