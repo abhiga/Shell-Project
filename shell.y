@@ -310,13 +310,14 @@ void expandEnv(char* temp) {
 		char * temp2 = expArg;
 		char * temp3 = temp2 + 1;
 		int i = 0;
+		int j = 0;
 		while(temp[i]!='\0' && i < 1024) {
 			
 			if (temp[i] != '$') {
-				*temp2 = temp [i];
-				*temp3 = '\0';
-				temp3++;
-				temp2++;
+				expArg[j] = temp [i];
+				expArg[j + 1] = '\0';
+				
+				j++;
 				i++;
 			}
 			else {
@@ -329,8 +330,7 @@ void expandEnv(char* temp) {
 				if(final!=NULL)
 					strcat (expArg, final);
 				i = i + strlen(out) + 3;
-				if(final!=NULL)
-				temp2 = strlen(final) + temp2;
+				j = strlen(final) + j;
 			}
 		temp = strdup(expArg);
 		}
