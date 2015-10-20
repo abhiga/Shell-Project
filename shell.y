@@ -333,8 +333,8 @@ void expandEnv(char* temp) {
 				//fprintf(stderr,"%s\n", out1);
 				char * final = getenv(out1);
 				fprintf(stderr,"%s\n", final);
-				if(final!=NULL)
-					strcat (expArg, final);
+				strcat (expArg, final);
+				fprintf(stderr,"%s\n", expArg);
 				i = i + strlen(out1) + 3;
 				j = strlen(final) + j;
 			}
