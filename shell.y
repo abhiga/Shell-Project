@@ -315,6 +315,18 @@ void expandEnv(char* temp) {
 				temp2++;
 				i++;
 			}
+			else {
+				char *beg = strchr((char *)(temp + i), '{');
+				char *last = strchr((char *)(temp + i), '}');
+				char out[strlen(temp)];
+				memset[out, strlen(temp)];
+				strncat(out, beg + 1, last - beg - 1);
+				char * final = getenv(out);
+				strcat (expArg, final);
+				i = i + strlen(out) + 3;
+				temp2 = strlen(final) + temp2;
+			}
+		temp = strdup(expArg);
 		}
 	}
 
