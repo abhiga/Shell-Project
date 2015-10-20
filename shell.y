@@ -323,7 +323,7 @@ void expandEnv(char* temp) {
 			else {
 				char *beg = strchr((char *)(temp + i), '{');
 				char *last = strchr((char *)(temp + i), '}');
-				fprintf(stderr,"%s\n%s\n", beg, last);
+				//fprintf(stderr,"%s\n%s\n", beg, last);
 				char out[strlen(temp)];
 				beg[strlen(beg)-1] = '\0';
 				beg++;
