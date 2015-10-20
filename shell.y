@@ -308,10 +308,13 @@ void expandEnv(char* temp) {
 		char expArg[1024];
 		memset(expArg, 0, 1024);
 		char * temp2 = expArg;
+		char * temp3 = temp2 + 1;
 		int i = 0;
 		while(temp[i]!='\0' && i < 1024) {
 			if (temp[i] != '$') {
 				*temp2 = temp [i];
+				*temp3 = '\0';
+				temp3++;
 				temp2++;
 				i++;
 			}
