@@ -305,7 +305,19 @@ void expandEnv(char* temp) {
         return;
     }
 	if(regexec(&re, temp, 1, &match, 0) == 0) {
+		char expArg[1024];
+		memset(expArg, 0, 1024);
+		char * temp2 = expArg;
+		int i = 0;
+		while(temp[i]!='\0' && i < 1024) {
+			if (temp[i] != '$') {
+				*temp2 = temp [i];
+				temp2++;
+				i++;
+			}
+		}
 	}
+
 		
 }
 		
