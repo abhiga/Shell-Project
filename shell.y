@@ -310,13 +310,13 @@ void expandEnv(char* temp) {
 		char * temp2 = expArg;
 		char * temp3 = temp2 + 1;
 		int i = 0;
+		int j = 0;
 		fprintf(stderr,"abhiga\n");
 		while(temp[i]!='\0' && i < 1024) {
 			if (temp[i] != '$') {
-				*temp2 = temp [i];
-				*temp3 = '\0';
-				temp3++;
-				temp2++;
+				expArg[j] = temp [i];
+				expArg[j + 1] = '\0';
+				j++;
 				i++;
 			}
 			else {
