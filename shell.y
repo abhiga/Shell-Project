@@ -311,7 +311,7 @@ void expandEnv(char* temp) {
 		char * temp3 = temp2 + 1;
 		int i = 0;
 		while(temp[i]!='\0' && i < 1024) {
-			fprintf(stderr,"abhiga\n");
+			
 			if (temp[i] != '$') {
 				*temp2 = temp [i];
 				*temp3 = '\0';
@@ -320,6 +320,7 @@ void expandEnv(char* temp) {
 				i++;
 			}
 			else {
+				fprintf(stderr,"abhiga\n");
 				char *beg = strchr((char *)(temp + i), '{');
 				char *last = strchr((char *)(temp + i), '}');
 				char out[strlen(temp)];
