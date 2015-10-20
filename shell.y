@@ -337,8 +337,8 @@ void expandEnv(char* temp) {
 				i = i + strlen(out1) + 3;
 				j = strlen(final) + j;
 			}
-		temp = strdup(expArg);
 		fprintf(stderr, "%s\n",expArg);
+		temp = strdup(expArg);
 		}
 	}
 
