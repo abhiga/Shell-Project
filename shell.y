@@ -334,11 +334,11 @@ void expandEnv(char* temp) {
 				char * final = getenv(out1);
 				fprintf(stderr,"%s\n", final);
 				strcat (expArg, final);
-				fprintf(stderr,"%s\n", expArg);
 				i = i + strlen(out1) + 3;
 				j = strlen(final) + j;
 			}
 		temp = strdup(expArg);
+		fprintf(stderr, "%s\n",expArg);
 		}
 	}
 
