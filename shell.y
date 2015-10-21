@@ -352,16 +352,21 @@ void escapeChar(char* temp) {
 	char final[strlen(temp)];
 	char *f = final;
 	char *t = temp;
-	while(*(t+1)!='\0') {
-		if (*t = '\\') {
-			*f = *(t+1);
+	while(*t!='\0') {
+		if (*(t+1) == '\0') {
 			t++;
+		}
+		else if (*(t+1)!='\0'){
+			if (*t = '\\') {
+			*f = *(t+1);
+			t = t + 2;
+			}
 		}
 		else {
 		*f = *t;
 		}
-		f++;
-		t++;
+		//f++;
+		//t++;
 	}
 	*f = '\0';
 strcpy(temp,final);
