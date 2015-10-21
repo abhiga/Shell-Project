@@ -326,7 +326,7 @@ void expandEnv(char* temp) {
 				strcat (expArg, final);
 				temp2 = temp2 + strlen(final);
 				i = i + strlen(out) + 3;
-				fprintf(stderr,"%s\n",final);
+				//fprintf(stderr,"%s\n",final);
 			}
 		}
 		strcpy(temp,expArg);
