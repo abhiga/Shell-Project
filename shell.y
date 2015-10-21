@@ -27,6 +27,7 @@
 #include "command.h"
 #include <pwd.h>
 	char **array;
+	void escapeChar(char*);
 	void expandEnv(char*);
 	void checkThenInsert(char *);
 	void expandTilde(char *);
@@ -162,13 +163,19 @@ GREATGREAT WORD {
 #include <regex.h>
 #include <dirent.h>
 
+
 void checkThenInsert(char * temp) {
 	if(*temp == '~') 
 		expandTilde(temp);
 	if(*temp == '$')
 		expandEnv(temp);
+	if (!(strchr(temp, '\\') == NULL)) {
+        escapeChar(temp);
+    }
 Command::_currentSimpleCommand->insertArgument( temp );
 }
+
+
 void expandTilde(char * temp){
 	if ((strcmp(temp, "~") == 0) || (strcmp(temp, "~/") == 0)) 
         strcpy(temp, getpwnam(getenv("USER"))->pw_dir);
@@ -181,6 +188,8 @@ void expandTilde(char * temp){
 		strcpy(temp,newTemp);
 	} 
 } 
+
+
 void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) 
         return;
@@ -290,11 +299,15 @@ void expandWildcard(char* prefix, char* suffix) {
         Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
 	closedir(dir);
 }
+
+
 void expandWildcardsifNecessary(char * tmp) {
 		char temp[1];
 		expandWildcard(temp, tmp);
 		free(array);
 }
+
+
 void expandEnv(char* temp) {
 	char * tomatch = "\\${.*}";
 	regex_t re;
@@ -333,7 +346,10 @@ void expandEnv(char* temp) {
 	}
 	
 }
-		
+
+
+void escapeChar(char* temp) {
+}		
 
 	void
 yyerror(const char * s)

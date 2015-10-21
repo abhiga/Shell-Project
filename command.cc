@@ -256,8 +256,8 @@ int yyparse(void);
 
 extern "C" void avoid_controlc( int sig )
 {	
-	Command::_currentCommand.clear();
 	fprintf(stdout,"\n");
+	Command::_currentCommand.clear();
 	Command::_currentCommand.prompt();
 }
 void avoid_zombiep(int sig) {
