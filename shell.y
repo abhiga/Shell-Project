@@ -315,38 +315,25 @@ void expandEnv(char* temp) {
 			
 			if (temp[i] != '$') {
 				expArg[j] = temp [i];
-				expArg[j + 1] = '\0';
+				//expArg[j + 1] = '\0';
 				
 				j++;
 				i++;
 			}
 			else {
 				char *beg = strchr((char *)(temp + i), '{');
-				char *last = strchr((char *)(temp + i), '}');
-				//fprintf(stderr,"%s\n%s\n", beg, last);
-				char out[strlen(temp)];
 				beg[strlen(beg)-1] = '\0';
 				beg++;
-				memset[out, strlen(temp)];
-				strncat(out, beg + 1, last - beg - 1);
-				char *out1 = strdup(beg);
-				//fprintf(stderr,"%s\n", out1);
-				char * final = getenv(out1);
-				//fprintf(stderr,"%s\n", final);
+				char *out = strdup(beg);
+				char * final = getenv(out);
 				strcat (expArg, final);
-				i = i + strlen(out1) + 3;
+				i = i + strlen(out) + 3;
 				j = strlen(final) + j;
 			}
-		//fprintf(stderr, "%s\n",expArg);
-		
 		}
-		//fprintf(stderr, "%s\n",expArg);
-
 		strcpy(temp,expArg);
 	}
-	//fprintf(stderr, "%s\n",temp);
-
-		
+	
 }
 		
 
