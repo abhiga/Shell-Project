@@ -170,16 +170,16 @@ void checkThenInsert(char * temp) {
 	if(*temp == '$')
 		expandEnv(temp);
 	if (!(strchr(temp, '\\') == NULL)) {
-        escapeChar(temp);
-    }
-Command::_currentSimpleCommand->insertArgument( temp );
+		escapeChar(temp);
+	}
+	Command::_currentSimpleCommand->insertArgument( temp );
 }
 
 
 void expandTilde(char * temp){
 	if ((strcmp(temp, "~") == 0) || (strcmp(temp, "~/") == 0)) 
-        strcpy(temp, getpwnam(getenv("USER"))->pw_dir);
-    else {
+		strcpy(temp, getpwnam(getenv("USER"))->pw_dir);
+	else {
 		char newTemp[strlen(temp) + 10];
 		strcpy(newTemp, "/homes/");
 		char *shiftTemp = temp;
@@ -192,33 +192,33 @@ void expandTilde(char * temp){
 
 void expandWildcard(char* prefix, char* suffix) {
 	if (suffix[0] == 0) 
-        return;
-    char * sub = strchr(suffix, '/');
-    char component[1024];
-    if (sub != NULL) {
-        if ((sub - suffix) < 1) 
-            component[0] = '\0';
-        else 
-            strncpy(component, suffix, sub - suffix);
-        
-        suffix = sub + 1;
-    } 
-	else {
-     	strcpy(component, suffix);
-        suffix = suffix + strlen(suffix);
-    }
+		return;
+	char * sub = strchr(suffix, '/');
+	char component[1024];
+	if (sub != NULL) {
+		if ((sub - suffix) < 1) 
+			component[0] = '\0';
+		else 
+			strncpy(component, suffix, sub - suffix);
 
-    char newPrefix[1024];
-    if ((strchr(component, '*') == NULL) && (strchr(component, '?') == NULL)) {
-        if (strlen(prefix) == 1 && *prefix == '/') {
-            sprintf(newPrefix, "/%s", component);
-        } 
+		suffix = sub + 1;
+	} 
+	else {
+		strcpy(component, suffix);
+		suffix = suffix + strlen(suffix);
+	}
+
+	char newPrefix[1024];
+	if ((strchr(component, '*') == NULL) && (strchr(component, '?') == NULL)) {
+		if (strlen(prefix) == 1 && *prefix == '/') {
+			sprintf(newPrefix, "/%s", component);
+		} 
 		else {
-            sprintf(newPrefix, "%s/%s", prefix, component);
-        }
-        expandWildcard(strdup(newPrefix), strdup(suffix));
-        return;
-    }
+			sprintf(newPrefix, "%s/%s", prefix, component);
+		}
+		expandWildcard(strdup(newPrefix), strdup(suffix));
+		return;
+	}
 	char * reg = (char *) malloc(2 * strlen(component) + 10);
 	char * a = component;
 	char * r = reg;
@@ -234,18 +234,18 @@ void expandWildcard(char* prefix, char* suffix) {
 	regex_t re;
 	int regexbuff = regcomp(&re, reg, REG_EXTENDED | REG_NOSUB);
 	if (regexbuff != 0) {
-        perror("regcomp");
-        return;
-    }
+		perror("regcomp");
+		return;
+	}
 	char * dr;
 	if (prefix[0] == 0) {
-        dr = (char *)malloc(sizeof(char) * 2);
-        dr[0] = '.';
-        dr[1] = '\0';
-    } 
+		dr = (char *)malloc(sizeof(char) * 2);
+		dr[0] = '.';
+		dr[1] = '\0';
+	} 
 	else {
-        dr = strdup(prefix);
-    }
+		dr = strdup(prefix);
+	}
 
 	DIR * dir = opendir(dr);
 	if (dir == NULL) {
@@ -260,51 +260,51 @@ void expandWildcard(char* prefix, char* suffix) {
 	while((ent = readdir(dir))!=NULL) {
 		if(regexec(&re, ent -> d_name, 1, &match, 0) == 0) {
 			if (strlen(prefix) == 0) {
-                sprintf(newPrefix, "%s", strdup(ent->d_name));
-            } 
+				sprintf(newPrefix, "%s", strdup(ent->d_name));
+			} 
 			else if (strlen(prefix) == 1 && *prefix == '/') {
-                sprintf(newPrefix, "/%s", strdup(ent->d_name));
-            } 
-            else {
-                sprintf(newPrefix, "%s/%s", prefix, strdup(ent->d_name));
-            }
+				sprintf(newPrefix, "/%s", strdup(ent->d_name));
+			} 
+			else {
+				sprintf(newPrefix, "%s/%s", prefix, strdup(ent->d_name));
+			}
 			expandWildcard(strdup(newPrefix), strdup(suffix));
 			if (nEntries >= maxEntries) {
-                maxEntries = maxEntries + maxEntries;
-                array = (char **)realloc(array, maxEntries * sizeof(char *));
-            }
-			if (*ent->d_name == '.') {
-                if (*component == '.') 
-                    array[nEntries++] = strdup(ent->d_name);
-                
-            } 
-			else {
-                if (strlen(suffix) ==0) 
-                    array[nEntries++] = strdup(newPrefix);
+				maxEntries = maxEntries + maxEntries;
+				array = (char **)realloc(array, maxEntries * sizeof(char *));
 			}
-		
+			if (*ent->d_name == '.') {
+				if (*component == '.') 
+					array[nEntries++] = strdup(ent->d_name);
+
+			} 
+			else {
+				if (strlen(suffix) ==0) 
+					array[nEntries++] = strdup(newPrefix);
+			}
+
 		}
 	}
 	//sort
 	for (int i = 0; i < nEntries; i++) {
 		for (int j = 0; j < nEntries-1; j++) {
 			if (strcmp(array[j], array[j + 1]) > 0) {
-                char * tmp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = tmp;
+				char * tmp = array[j + 1];
+				array[j + 1] = array[j];
+				array[j] = tmp;
 			}
 		}
 	}
 	for (int i = 0; i < nEntries; i++) 
-        Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
+		Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
 	closedir(dir);
 }
 
 
 void expandWildcardsifNecessary(char * tmp) {
-		char temp[1];
-		expandWildcard(temp, tmp);
-		free(array);
+	char temp[1];
+	expandWildcard(temp, tmp);
+	free(array);
 }
 
 
@@ -314,16 +314,16 @@ void expandEnv(char* temp) {
 	regmatch_t match;
 	int regexbuff = regcomp(&re, tomatch, 0);
 	if (regexbuff != 0) {
-        perror("regcomp");
-        return;
-    }
+		perror("regcomp");
+		return;
+	}
 	if(regexec(&re, temp, 1, &match, 0) == 0) {
 		char expArg[1024];
 		memset(expArg, 0, 1024);
 		char * temp2 = expArg;
 		int i = 0;
 		while(temp[i]!='\0' && i < 1024) {
-			
+
 			if (temp[i] != '$') {
 				*temp2 = temp [i];
 				temp2++;
@@ -344,7 +344,7 @@ void expandEnv(char* temp) {
 		}
 		strcpy(temp,expArg);
 	}
-	
+
 }
 
 

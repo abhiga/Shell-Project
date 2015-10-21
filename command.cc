@@ -196,28 +196,28 @@ Command::execute()
 		dup2(fdout, 1);
 
 		close(fdout);
-		
+
 		if (strcmp(_simpleCommands[0]->_arguments[0], "setenv") == 0) 
-            setenv(_simpleCommands[0]->_arguments[1], _simpleCommands[0]->_arguments[2], 1);
+			setenv(_simpleCommands[0]->_arguments[1], _simpleCommands[0]->_arguments[2], 1);
 		else if(strcmp(_simpleCommands[0]->_arguments[0], "unsetenv") == 0) 
-            unsetenv(_simpleCommands[0]->_arguments[1]);
+			unsetenv(_simpleCommands[0]->_arguments[1]);
 		else if (strcmp(_simpleCommands[0]->_arguments[0], "cd") == 0) {
-            if (_simpleCommands[0]->_arguments[1] == NULL)
-                chdir(getenv("HOME"));
-            else if (chdir(_simpleCommands[0]->_arguments[1]) < 0) 
-                    perror("chdir");
-   		}
+			if (_simpleCommands[0]->_arguments[1] == NULL)
+				chdir(getenv("HOME"));
+			else if (chdir(_simpleCommands[0]->_arguments[1]) < 0) 
+				perror("chdir");
+		}
 		else {
-		ret = fork();
-		if (ret == 0) {
-			execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
-			perror("execvp");
-			exit(1);
-		}
-		else if (ret < 0) {
-			perror("fork");
-			return;
-		}
+			ret = fork();
+			if (ret == 0) {
+				execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
+				perror("execvp");
+				exit(1);
+			}
+			else if (ret < 0) {
+				perror("fork");
+				return;
+			}
 		}
 
 
@@ -261,7 +261,7 @@ extern "C" void avoid_controlc( int sig )
 	Command::_currentCommand.prompt();
 }
 void avoid_zombiep(int sig) {
-    while (waitpid((pid_t)(-1), 0, WNOHANG) > 0) {}   
+	while (waitpid((pid_t)(-1), 0, WNOHANG) > 0) {}   
 }
 
 main()
