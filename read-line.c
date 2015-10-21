@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <termios.h>
 
 #define MAX_BUFFER_LINE 2048
 
@@ -43,7 +44,9 @@ void read_line_print_usage()
  * Input a line with some basic editing.
  */
 char * read_line() {
-
+	
+	struct termios orig_attr;
+	tcgetattr(0,&orig_attr);
 	// Set terminal in raw mode
 	tty_raw_mode();
 
@@ -83,7 +86,7 @@ char * read_line() {
 			line_buffer[0]=0;
 			break;
 		}
-		else if (ch == 8) {
+		else if (ch == 8 || ch == 127) {
 			// <backspace> was typed. Remove previous character read.
 
 			// Go back one character
@@ -163,7 +166,7 @@ char * read_line() {
 	line_buffer[line_length]=10;
 	line_length++;
 	line_buffer[line_length]=0;
-
+	tcsetattr(0,TCSANOW,&orig_attr);
 	return line_buffer;
 }
 
