@@ -308,9 +308,7 @@ void expandEnv(char* temp) {
 		char expArg[1024];
 		memset(expArg, 0, 1024);
 		char * temp2 = expArg;
-		//char * temp3 = temp2 + 1;
 		int i = 0;
-		//int j = 0;
 		while(temp[i]!='\0' && i < 1024) {
 			
 			if (temp[i] != '$') {
@@ -320,7 +318,8 @@ void expandEnv(char* temp) {
 			}
 			else {
 				char *beg = strchr((char *)(temp + i), '{');
-				beg[strlen(beg)-1] = '\0';
+				char *end = strchr((char *)(temp + i), '}');
+				beg[end - beg] = '\0';
 				beg++;
 				char *out = strdup(beg);
 				char * final = getenv(out);
