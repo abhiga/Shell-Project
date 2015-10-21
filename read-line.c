@@ -15,7 +15,7 @@
 // Buffer where line is stored
 int line_length;;
 char line_buffer[MAX_BUFFER_LINE];
-
+int cursor_pos = 0;
 // Simple history array
 // This history does not change. 
 // Yours have to be updated.
@@ -51,7 +51,7 @@ char * read_line() {
 	tty_raw_mode();
 
 	line_length = 0;
-
+	cursor_pos = 0;
 	// Read one line until enter is typed
 	while (1) {
 
@@ -116,7 +116,9 @@ char * read_line() {
 			read(0, &ch2, 1);
 			if (ch1 == 91 && ch2 == 68) {
 				//left arrow key
-				write(1, "left arrow\n", strlen("left arrow\n"));
+				//write(1, "left arrow\n", strlen("left arrow\n"));
+				ch = 8;
+				write(1, &ch, 1);
 			}
 			if (ch1 == 91 && ch2 == 67) {
 				//right arrow key
