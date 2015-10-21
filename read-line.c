@@ -117,11 +117,11 @@ char * read_line() {
 			}
 			if (ch1 == 91 && ch2 == 67) {
 				//right arrow key
-				write(1, "left arrow\n", strlen("left arrow\n"));
+				write(1, "right arrow\n", strlen("left arrow\n"));
 			}
 			if (ch1 == 91 && ch2 == 66) {
 				//down arrow key
-				write(1, "left arrow\n", strlen("left arrow\n"));
+				write(1, "down arrow\n", strlen("left arrow\n"));
 			}
 			if (ch1==91 && ch2==65) {
 				// Up arrow. Print next line in history.
