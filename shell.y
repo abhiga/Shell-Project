@@ -340,7 +340,7 @@ void expandEnv(char* temp) {
 		//fprintf(stderr, "%s\n",expArg);
 		
 		}
-		fprintf(stderr, "%s\n",expArg);
+		//fprintf(stderr, "%s\n",expArg);
 
 		strcpy(temp,expArg);
 	}
