@@ -59,11 +59,18 @@ char * read_line() {
 		char ch;
 		read(0, &ch, 1);
 
-		if (ch>=32) {
+		if (ch>=32 && ch!= 127) {
 			// It is a printable character. 
 
 			// Do echo
-			write(1,&ch,1);
+			int i;
+			for (i = cursor_pos; i< line_length; i++) 
+				line_buffer[i+1] = line_buffer[i];
+			
+			line_buffer[cursor_pos] = ch; 
+			line_length++;
+			for (i = cursor_pos; i < line_length; i++) 
+				write(1,&line_buffer[i],1);
 
 			// If max number of character reached return.
 			if (line_length==MAX_BUFFER_LINE-2) break; 
