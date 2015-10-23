@@ -70,14 +70,13 @@ char * read_line() {
 			}
 			line_buffer[cursor_pos] = ch; 
 			line_length++;
+			if (line_length==MAX_BUFFER_LINE-2) break; 
 			for (i = cursor_pos; i < line_length; i++) 
 				write(1,&line_buffer[i],1);
 
 			// If max number of character reached return.
-			if (line_length==MAX_BUFFER_LINE-2) break; 
 
 			// add char to buffer.
-			//line_buffer[line_length]=ch;
 			cursor_pos++;
 		}
 		else if (ch==10) {
