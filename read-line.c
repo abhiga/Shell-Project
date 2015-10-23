@@ -10,7 +10,7 @@
 #include <string.h>
 #include <termios.h>
 
-#define MAX_BUFFER_LINE 100
+#define MAX_BUFFER_LINE 2048
 
 // Buffer where line is stored
 int line_length;;
