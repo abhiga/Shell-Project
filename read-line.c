@@ -42,7 +42,7 @@ char * read_line() {
 	tcgetattr(0,&orig_attr);
 	// Set terminal in raw mode
 	tty_raw_mode();
-
+	history_index = 0;
 	line_length = 0;
 	cursor_pos = 0;
 	// Read one line until enter is typed
