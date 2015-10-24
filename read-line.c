@@ -260,7 +260,7 @@ char * read_line() {
 					if (history_diff > 0)
 						history_index++;
 						
-
+					history_diff = history_length - history_index;
 					// Copy line from history
 					strcpy(line_buffer, history[history_diff]);
 					line_length = strlen(line_buffer);
