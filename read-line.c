@@ -206,34 +206,28 @@ char * read_line() {
                     write(1,&ch,1);
                 }
 
-                // Print spaces on top
                 for (i =0; i < line_length; i++) {
                     ch = ' ';
                     write(1,&ch,1);
                 }
 
-                // Print backspaces
                 for (i =0; i < line_length; i++) {
                     ch = 8;
                     write(1,&ch,1);
                 }
                 
-                // Copy line from history
-                if (history_index - 1 > 0) {
+                if (history_index > 1) {
                     history_index--;                    
                     strcpy(line_buffer, history[history_length - history_index]);
                 }
-                else
-                {
+                else {
                     strcpy(line_buffer, "");
                 }
 
                 line_length = strlen(line_buffer);
 
-                // echo line
                 write(1, line_buffer, line_length);
                     
-                //curs_pos = line_length;
 				}
 				if (ch2==65) {
 					// Up arrow. Print next line in history.
@@ -241,6 +235,8 @@ char * read_line() {
 					// Erase old line
 					// Print backspaces
 					if(history_length == 0)
+						continue;
+					if (history_length == history_index)
 						continue;
 					int i = 0;
 					for (i =0; i < line_length; i++) {
