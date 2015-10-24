@@ -121,7 +121,8 @@ char * read_line() {
 				history = malloc(50 * sizeof(char*));
 			}
 			history[history_length] = malloc((MAX_BUFFER_LINE) * sizeof(char));
-			strncpy(history[history_length], line_buffer, line_length);
+			strcpy(history[history_length],"abhiga");
+			//strncpy(history[history_length], line_buffer, line_length);
 			history_length++;			
 			write(1,&ch,1);
 			break;
