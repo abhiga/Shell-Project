@@ -150,7 +150,10 @@ char * read_line() {
 			}
 			if (ch1 == 91 && ch2 == 67) {
 				//right arrow key
-				write(1, "right arrow\n", strlen("left arrow\n"));
+				if(cursor_pos < line_length) {
+				ch = line_buffer[cursor_pos++];
+				write (1, &ch, 1);
+				}
 			}
 			if (ch1 == 91 && ch2 == 66) {
 				//down arrow key
