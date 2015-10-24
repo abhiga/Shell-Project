@@ -66,13 +66,16 @@ char * read_line() {
 			int i;
 			for (i = cursor_pos; i< line_length + 1; i++){
 				line_buffer[i+1] = line_buffer[i];
-				line_buffer[i+2] = '\0';
+				//line_buffer[i+2] = '\0';
 			}
 			line_buffer[cursor_pos] = ch; 
 			line_length++;
 			if (line_length==MAX_BUFFER_LINE-2) break; 
 			for (i = cursor_pos; i < line_length; i++) 
 				write(1,&line_buffer[i],1);
+			ch = 8;
+			for (i = cursor_pos + 1; i < line_length; i++)
+				write(1,&ch,1);
 
 			// If max number of character reached return.
 
@@ -104,8 +107,7 @@ char * read_line() {
 					line_buffer[i] = line_buffer[i+1];		
 			}
 			ch = 8;
-			write(1,&ch,1);
-			//for (i = cursor_pos; i 
+			write(1,&ch,1); 
 
 			// Write a space to erase the last character read
 			for (i = cursor_pos - 1; i < line_length - 1; i++) {
