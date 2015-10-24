@@ -44,7 +44,7 @@ void read_line_print_usage()
  * Input a line with some basic editing.
  */
 char * read_line() {
-	
+
 	struct termios orig_attr;
 	tcgetattr(0,&orig_attr);
 	// Set terminal in raw mode
@@ -104,16 +104,16 @@ char * read_line() {
 				continue;
 			int i;
 			for(i = cursor_pos; i < line_length; i++) {
-					line_buffer[i - 1] = line_buffer[i];		
+				line_buffer[i - 1] = line_buffer[i];		
 			}
 			ch = 8;
 			write(1,&ch,1); 
 
 			// Write a space to erase the last character read
 			for (i = cursor_pos - 1; i < line_length - 1; i++) {
-                    ch = line_buffer[i];
-                    write(1, &ch, 1);
-            }
+				ch = line_buffer[i];
+				write(1, &ch, 1);
+			}
 			ch = ' ';
 			write(1,&ch,1);
 
@@ -121,8 +121,8 @@ char * read_line() {
 			ch = 8;
 			write(1,&ch,1);
 			for (i = cursor_pos; i < line_length; i++) {
-                    write(1, &ch, 1);
-            }
+				write(1, &ch, 1);
+			}
 			// Remove one character from buffer
 			cursor_pos--;
 			line_length--;
@@ -138,61 +138,61 @@ char * read_line() {
 			read(0, &ch1, 1);
 			read(0, &ch2, 1);
 			if (ch1 == 91) {
-			if (ch2 == 68) {
-				//left arrow key
-				//write(1, "left arrow\n", strlen("left arrow\n"));
-				if (cursor_pos <= 0){
+				if (ch2 == 68) {
+					//left arrow key
+					//write(1, "left arrow\n", strlen("left arrow\n"));
+					if (cursor_pos <= 0){
+					}
+					else {					
+						ch = 8;
+						write(1, &ch, 1);
+						cursor_pos--;
+					}
 				}
-				else {					
-					ch = 8;
-					write(1, &ch, 1);
-					cursor_pos--;
+				if (ch2 == 67) {
+					//right arrow key
+					if(cursor_pos >= line_length) {
+					}
+					else {
+						ch = line_buffer[cursor_pos++];
+						write (1, &ch, 1);
+					}
 				}
-			}
-			if (ch2 == 67) {
-				//right arrow key
-				if(cursor_pos >= line_length) {
+				if (ch2 == 66) {
+					//down arrow key
+					write(1, "down arrow\n", strlen("left arrow\n"));
 				}
-				else {
-				ch = line_buffer[cursor_pos++];
-				write (1, &ch, 1);
-				}
-			}
-			if (ch2 == 66) {
-				//down arrow key
-				write(1, "down arrow\n", strlen("left arrow\n"));
-			}
-			if (ch2==65) {
-				// Up arrow. Print next line in history.
+				if (ch2==65) {
+					// Up arrow. Print next line in history.
 
-				// Erase old line
-				// Print backspaces
-				int i = 0;
-				for (i =0; i < line_length; i++) {
-					ch = 8;
-					write(1,&ch,1);
-				}
+					// Erase old line
+					// Print backspaces
+					int i = 0;
+					for (i =0; i < line_length; i++) {
+						ch = 8;
+						write(1,&ch,1);
+					}
 
-				// Print spaces on top
-				for (i =0; i < line_length; i++) {
-					ch = ' ';
-					write(1,&ch,1);
-				}
+					// Print spaces on top
+					for (i =0; i < line_length; i++) {
+						ch = ' ';
+						write(1,&ch,1);
+					}
 
-				// Print backspaces
-				for (i =0; i < line_length; i++) {
-					ch = 8;
-					write(1,&ch,1);
-				}	
+					// Print backspaces
+					for (i =0; i < line_length; i++) {
+						ch = 8;
+						write(1,&ch,1);
+					}	
 
-				// Copy line from history
-				strcpy(line_buffer, history[history_index]);
-				line_length = strlen(line_buffer);
-				history_index=(history_index+1)%history_length;
+					// Copy line from history
+					strcpy(line_buffer, history[history_index]);
+					line_length = strlen(line_buffer);
+					history_index=(history_index+1)%history_length;
 
-				// echo line
-				write(1, line_buffer, line_length);
-			} }
+					// echo line
+					write(1, line_buffer, line_length);
+				} }
 
 		}
 
