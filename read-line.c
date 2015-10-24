@@ -225,6 +225,7 @@ char * read_line() {
                 }
 
                 line_length = strlen(line_buffer);
+				cursor_pos = line_length;
 
                 write(1, line_buffer, line_length);
                     
@@ -264,7 +265,7 @@ char * read_line() {
 					strcpy(line_buffer, history[history_diff - 1]);
 					line_length = strlen(line_buffer);
 					//history_index=(history_index+1)%history_length;
-
+					cursor_pos = line_length;
 					// echo line
 					write(1, line_buffer, line_length);
 				} 
