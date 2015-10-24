@@ -222,6 +222,7 @@ char * read_line() {
                 }
                 else {
                     strcpy(line_buffer, "");
+					history_index--;
                 }
 
                 line_length = strlen(line_buffer);
