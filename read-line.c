@@ -150,7 +150,9 @@ char * read_line() {
 			}
 			if (ch1 == 91 && ch2 == 67) {
 				//right arrow key
-				if(cursor_pos < line_length) {
+				if(cursor_pos >= line_length) {
+				}
+				else {
 				ch = line_buffer[cursor_pos++];
 				write (1, &ch, 1);
 				}
