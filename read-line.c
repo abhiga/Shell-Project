@@ -110,6 +110,15 @@ char * read_line() {
 				write(1,&ch,1);
 		}
 		else if (ch == 5) {
+			while(cursor_pos < line_length) {
+				ch = 27;
+                write(1,&ch,1);
+                ch = 91;
+                write(1,&ch,1);
+                ch = 67;
+                write(1,&ch,1);
+				cursor_pos++;
+            }
 		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
