@@ -108,6 +108,10 @@ char * read_line() {
 			//for (i = cursor_pos; i 
 
 			// Write a space to erase the last character read
+			for (i = cursor_pos - 1; i < line_length - 1; i++) {
+                    ch = line_buffer[i];
+                    write(1, &ch, 1);
+            }
 			ch = ' ';
 			write(1,&ch,1);
 
