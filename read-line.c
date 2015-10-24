@@ -123,7 +123,8 @@ char * read_line() {
 			history[history_length] = malloc((MAX_BUFFER_LINE) * sizeof(char));
 			strncpy(history[history_length], line_buffer, line_length);
 			history[history_length][line_length] = '\0';
-			write(1,history[history_length],strlen(history[history_length]));
+			char *p = strdup (history[history_length]);
+			write(1,p,strlen(p));
 			//strncpy(history[history_length], line_buffer, line_length);
 			history_length++;			
 			write(1,&ch,1);
