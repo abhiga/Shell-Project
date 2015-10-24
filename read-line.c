@@ -137,7 +137,7 @@ char * read_line() {
 			char ch2;
 			read(0, &ch1, 1);
 			read(0, &ch2, 1);
-			if (ch == 91) {
+			if (ch1 == 91) {
 			if (ch2 == 68) {
 				//left arrow key
 				//write(1, "left arrow\n", strlen("left arrow\n"));
