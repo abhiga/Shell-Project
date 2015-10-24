@@ -105,6 +105,7 @@ char * read_line() {
 			}
 			ch = 8;
 			write(1,&ch,1);
+			//for (i = cursor_pos; i 
 
 			// Write a space to erase the last character read
 			ch = ' ';
@@ -115,6 +116,7 @@ char * read_line() {
 			write(1,&ch,1);
 
 			// Remove one character from buffer
+			cursor_pos--;
 			line_length--;
 		}
 		else if (ch==27) {
