@@ -95,12 +95,12 @@ char * read_line() {
 			for (i = cursor_pos; i < line_length; i++) {
 				write(1,&line_buffer[i],1);
 			}
-			ch = '$';
+			ch = 32;
 			write(1,&ch,1);
 			ch = 8;
 			write(1,&ch,1);
-			for(i = cursor_pos; i < line_length; i++) 
-				write(1,&ch,1);
+			//for(i = cursor_pos; i < line_length; i++) 
+				//write(1,&ch,1);
 		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
