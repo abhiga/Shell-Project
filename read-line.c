@@ -117,8 +117,13 @@ char * read_line() {
 			// <Enter> was typed. Return line
 
 			// Print newline
+			if (history_length == 0) {
+				history = malloc(50 * sizeof(char*));
+			}
+			history[history_length] = malloc((MAX_BUFFER_LINE) * sizeof(char));
+			strncpy(history[history_length], line_buffer, line_length);
 			write(1,&ch,1);
-
+			history_length++;
 			break;
 		}
 		else if (ch == 31) {
@@ -198,6 +203,7 @@ char * read_line() {
 
 					// Erase old line
 					// Print backspaces
+
 					int i = 0;
 					for (i =0; i < line_length; i++) {
 						ch = 8;
