@@ -138,7 +138,7 @@ char * read_line() {
 			if (ch1 == 91 && ch2 == 68) {
 				//left arrow key
 				//write(1, "left arrow\n", strlen("left arrow\n"));
-				if (cursor_pos == 0){
+				if (cursor_pos <= 0){
 				}
 				else {					
 					ch = 8;
