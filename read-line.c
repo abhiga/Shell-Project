@@ -104,7 +104,7 @@ char * read_line() {
 				continue;
 			int i;
 			for(i = cursor_pos; i < line_length; i++) {
-					line_buffer[i] = line_buffer[i+1];		
+					line_buffer[i - 1] = line_buffer[i];		
 			}
 			ch = 8;
 			write(1,&ch,1); 
