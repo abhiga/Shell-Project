@@ -100,7 +100,9 @@ char * read_line() {
 			if(cursor_pos==0 || line_length==0)
 				continue;
 			int i;
-			//for(i = line_length; 
+			for(i = line_length; i >= cursor_pos -1; i--) {
+					line_buffer[i] = line_buffer[i+1];		
+			}
 			ch = 8;
 			write(1,&ch,1);
 
