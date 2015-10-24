@@ -118,7 +118,9 @@ char * read_line() {
 			// Go back one character
 			ch = 8;
 			write(1,&ch,1);
-
+			for (i = cursor_pos; i < line_length; i++) {
+                    write(1, &ch, 1);
+            }
 			// Remove one character from buffer
 			cursor_pos--;
 			line_length--;
