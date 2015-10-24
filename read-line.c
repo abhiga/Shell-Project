@@ -64,7 +64,7 @@ char * read_line() {
 
 			// Do echo
 			int i;
-			for (i = cursor_pos; i< line_length + 1; i++){
+			for (i = line_length - 1; i >= cursor_pos; i--){
 				line_buffer[i+1] = line_buffer[i];
 				//line_buffer[i+2] = '\0';
 			}
@@ -103,7 +103,7 @@ char * read_line() {
 			if(cursor_pos==0 || line_length==0)
 				continue;
 			int i;
-			for(i = line_length; i >= cursor_pos -1; i--) {
+			for(i = cursor_pos; i < line_length; i++) {
 					line_buffer[i] = line_buffer[i+1];		
 			}
 			ch = 8;
