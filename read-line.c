@@ -82,6 +82,26 @@ char * read_line() {
 			// add char to buffer.
 			cursor_pos++;
 		}
+		else if (ch == 4) {
+			if(cursor_pos == line_length)
+				continue;
+			else if(line_length == 0)
+				continue;
+			int i;
+			for (i = cursor_pos + 1; i < line_length; i++) {
+				line_buffer[i - 1] = line_buffer[i];
+			}
+			line_length--;
+			for (i = cursor_pos; i < line_length; i++) {
+				write(1,&line_buffer[i],1);
+			}
+			ch = ' ';
+			write(1,&ch,1);
+			ch = 8;
+			write(1,&ch,1);
+			for(i = cursor_pos; i < line_length; i++) 
+				write(1,&ch,1);
+		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
 
