@@ -95,7 +95,7 @@ char * read_line() {
 			for (i = cursor_pos; i < line_length; i++) {
 				write(1,&line_buffer[i],1);
 			}
-			ch = ' ';
+			ch = '$';
 			write(1,&ch,1);
 			ch = 8;
 			write(1,&ch,1);
