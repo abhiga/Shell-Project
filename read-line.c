@@ -19,16 +19,9 @@ int cursor_pos = 0;
 // Simple history array
 // This history does not change. 
 // Yours have to be updated.
+int history_length = 0;
 int history_index = 0;
-char * history [] = {
-	"ls -al | grep x", 
-	"ps -e",
-	"cat read-line-example.c",
-	"vi hello.c",
-	"make",
-	"ls -al | grep xxx | grep yyy"
-};
-int history_length = sizeof(history)/sizeof(char *);
+char **history;
 
 void read_line_print_usage()
 {
