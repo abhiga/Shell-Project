@@ -234,6 +234,7 @@ char * read_line() {
 
 					// echo line
 					write(1, line_buffer, line_length);
+					cursor_pos = line_length;
 				} 
 			}
 
