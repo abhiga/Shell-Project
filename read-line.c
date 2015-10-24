@@ -122,8 +122,8 @@ char * read_line() {
 			}
 			history[history_length] = malloc((MAX_BUFFER_LINE) * sizeof(char));
 			strncpy(history[history_length], line_buffer, line_length);
+			history_length++;			
 			write(1,&ch,1);
-			history_length++;
 			break;
 		}
 		else if (ch == 31) {
@@ -228,7 +228,7 @@ char * read_line() {
 						
 
 					// Copy line from history
-					//strcpy(line_buffer, history[history_diff]);
+					strcpy(line_buffer, history[history_diff]);
 					line_length = strlen(line_buffer);
 					//history_index=(history_index+1)%history_length;
 
