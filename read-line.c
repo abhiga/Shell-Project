@@ -216,7 +216,7 @@ char * read_line() {
                     write(1,&ch,1);
                 }
                 
-                if (history_index >= 1) {
+                if (history_index > 1) {
                     history_index--;                    
                     strcpy(line_buffer, history[history_length - history_index]);
                 }
