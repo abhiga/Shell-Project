@@ -137,7 +137,8 @@ char * read_line() {
 			char ch2;
 			read(0, &ch1, 1);
 			read(0, &ch2, 1);
-			if (ch1 == 91 && ch2 == 68) {
+			if (ch == 91) {
+			if (ch2 == 68) {
 				//left arrow key
 				//write(1, "left arrow\n", strlen("left arrow\n"));
 				if (cursor_pos <= 0){
@@ -148,7 +149,7 @@ char * read_line() {
 					cursor_pos--;
 				}
 			}
-			if (ch1 == 91 && ch2 == 67) {
+			if (ch2 == 67) {
 				//right arrow key
 				if(cursor_pos >= line_length) {
 				}
@@ -157,11 +158,11 @@ char * read_line() {
 				write (1, &ch, 1);
 				}
 			}
-			if (ch1 == 91 && ch2 == 66) {
+			if (ch2 == 66) {
 				//down arrow key
 				write(1, "down arrow\n", strlen("left arrow\n"));
 			}
-			if (ch1==91 && ch2==65) {
+			if (ch2==65) {
 				// Up arrow. Print next line in history.
 
 				// Erase old line
@@ -191,7 +192,7 @@ char * read_line() {
 
 				// echo line
 				write(1, line_buffer, line_length);
-			}
+			} }
 
 		}
 
