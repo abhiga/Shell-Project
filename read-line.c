@@ -85,8 +85,6 @@ char * read_line() {
 		else if (ch == 4) {
 			if(cursor_pos == line_length)
 				continue;
-			//else if(line_length == 0)
-				//continue;
 			int i;
 			for (i = cursor_pos + 1; i < line_length; i++) {
 				line_buffer[i - 1] = line_buffer[i];
