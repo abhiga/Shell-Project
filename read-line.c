@@ -200,7 +200,40 @@ char * read_line() {
 				}
 				if (ch2 == 66) {
 					//down arrow key
-					write(1, "down arrow\n", strlen("left arrow\n"));
+				int i;
+                for (i =0; i < line_length; i++) {
+                    ch = 8;
+                    write(1,&ch,1);
+                }
+
+                // Print spaces on top
+                for (i =0; i < line_length; i++) {
+                    ch = ' ';
+                    write(1,&ch,1);
+                }
+
+                // Print backspaces
+                for (i =0; i < line_length; i++) {
+                    ch = 8;
+                    write(1,&ch,1);
+                }
+                
+                // Copy line from history
+                if (history_index - 1 > 0) {
+                    history_index--;                    
+                    strcpy(line_buffer, history[history_length - history_index]);
+                }
+                else
+                {
+                    strcpy(line_buffer, "");
+                }
+
+                line_length = strlen(line_buffer);
+
+                // echo line
+                write(1, line_buffer, line_length);
+                    
+                //curs_pos = line_length;
 				}
 				if (ch2==65) {
 					// Up arrow. Print next line in history.
