@@ -229,7 +229,7 @@ char * read_line() {
 
 					// Copy line from history
 					write(2,"abhiga\n");
-					strcpy(line_buffer, history[history_diff]);
+					//strcpy(line_buffer, history[history_diff]);
 					write(2,"abhigas\n");
 					line_length = strlen(line_buffer);
 					//history_index=(history_index+1)%history_length;
