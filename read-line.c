@@ -156,9 +156,13 @@ char * read_line() {
 				regex_t re;
 				int regexbuff = regcomp(&re, reg, REG_EXTENDED | REG_NOSUB);
                 if (regexbuff != 0) {
-                    perror("regcomp");
+                    perror("regcomp:problem compiling regular expression");
                     return;
                 }
+				char * dir = opendir(".");
+				if (dir == NULL) {
+					perror("opendir:problem opening directory");
+				}
 			}
 		}
 		else if (ch==10) {
@@ -327,6 +331,12 @@ char * read_line() {
 	line_buffer[line_length]=10;
 	line_length++;
 	line_buffer[line_length]=0;
+	if (tablistset) {
+        spaceindex = 0;
+        tablistset = 0;
+        tablistindex = 0;
+        free(tablist);
+    }
 	tcsetattr(0,TCSANOW,&orig_attr);
 	return line_buffer;
 }
