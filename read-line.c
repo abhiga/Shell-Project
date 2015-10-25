@@ -16,6 +16,11 @@
 int line_length;;
 char line_buffer[MAX_BUFFER_LINE];
 int cursor_pos = 0;
+char **tablist = NULL;
+int tablistindex = 0;
+int tablistset = 0;
+int tablistsize = 0;
+int spaceindex = 0;
 // Simple history array
 // This history does not change. 
 // Yours have to be updated.
@@ -26,9 +31,17 @@ char **history;
 void read_line_print_usage()
 {
 	char * usage = "\n"
-		" ctrl-?       Print usage\n"
-		" Backspace    Deletes last character\n"
-		" up arrow     See last command in the history\n";
+		" Usage(ctrl-?)        Print usage\n"
+        " Backspace(ctrl-H)    Deletes previous character\n"
+        " Delete(ctrl-D)       Deletes next character\n"
+        " Up arrow key         next oldest command in the history\n"
+        " Down arrow           next newest command in the history\n"
+        " Left arrow           Moves the cursor to the left\n"
+        " Right arrow          Moves the cursor to the right\n"
+        " End(ctrl-E)          Moves cursor to the end\n"
+        " Home(ctrl-A)         Moves cursor to the beginning\n"
+        " Tab                  Auto completion\n";
+
 
 	write(1, usage, strlen(usage));
 }
