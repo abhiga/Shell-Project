@@ -200,7 +200,10 @@ char * read_line() {
 				strcpy(line_buffer, tab_list[tablist_index]);
                 line_length = strlen(line_buffer); 
 			}
-			
+			write(1, line_buffer, line_length);
+            cursor_pos = line_length;
+            if (tablist_index < tablist_size - 1) 
+                tablist_index++;
 		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
