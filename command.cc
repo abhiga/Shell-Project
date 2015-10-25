@@ -149,9 +149,11 @@ Command::execute()
 	}
 	if(strcmp(_simpleCommands[0]->_arguments[0], "--debug") == 0) {
 		_debug = 1;
+		prompt();
 	}
 	if(strcmp(_simpleCommands[0]->_arguments[0], "--normal") == 0) {
 		_debug = 0;
+		prompt();
 	}
 	
 	// Print contents of Command data structure
