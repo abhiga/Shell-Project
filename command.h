@@ -24,7 +24,7 @@ struct Command {
 	char * _errFile;
 	int _background;
 	int _append;
-
+	int _debug;
 	void prompt();
 	void print();
 	void execute();

@@ -147,8 +147,18 @@ Command::execute()
 		printf("Good bye!!\n");
 		exit(0);
 	}
+	if(strcmp(_simpleCommands[0]->_arguments[0], "--debug") == 0) {
+		_debug = 1;
+		return;
+	}
+	if(strcmp(_simpleCommands[0]->_arguments[0], "--normal") == 0) {
+		_debug = 0;
+		return;
+	}
+	
 	// Print contents of Command data structure
-	//print();
+	if (_debug == 1)		
+		print();
 
 	// Add execution here
 	// For every simple command fork a new process
