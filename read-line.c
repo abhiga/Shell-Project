@@ -113,6 +113,9 @@ char * read_line() {
 				cursor_pos++;
             }
 		}
+		else if (ch ==9) {
+		
+		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
 

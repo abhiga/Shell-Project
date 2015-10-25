@@ -170,7 +170,7 @@ void checkThenInsert(char * temp) {
 	if(*temp == '$')
 		expandEnv(temp);
 	if (!(strchr(temp, '\\') == NULL)) {
-		escapeChar(temp);
+		//escapeChar(temp);
 	}
 	Command::_currentSimpleCommand->insertArgument( temp );
 }
