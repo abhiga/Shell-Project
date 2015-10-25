@@ -127,7 +127,17 @@ char * read_line() {
             }
 		}
 		else if (ch ==9) {
-		
+			if (tablistset == 0) {
+				char reg[line_length+10];
+				reg[0] = '^';
+			}
+			int i;
+			for (i = line_length - 1; i>=0; i--) {
+				if(line_buffer[i] == 32) {
+					spaceindex = i;
+					break;
+				}
+			}
 		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
