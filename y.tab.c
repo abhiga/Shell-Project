@@ -154,7 +154,6 @@ typedef union YYSTYPE
 #include "command.h"
 #include <pwd.h>
 	char **array;
-	void escapeChar(char*);
 	void expandEnv(char*);
 	void checkThenInsert(char *);
 	void expandTilde(char *);
@@ -166,7 +165,7 @@ typedef union YYSTYPE
 	
 
 /* Line 264 of yacc.c  */
-#line 170 "y.tab.c"
+#line 169 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -456,9 +455,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    44,    44,    48,    49,    52,    56,    60,    64,    68,
-      70,    74,    81,    82,    86,    98,   106,   109,   113,   114,
-     118,   126,   131,   139,   148
+       0,    43,    43,    47,    48,    51,    55,    59,    63,    67,
+      69,    73,    80,    81,    85,    97,   105,   108,   112,   113,
+     117,   125,   130,   138,   147
 };
 #endif
 
@@ -1386,7 +1385,7 @@ yyreduce:
         case 6:
 
 /* Line 1464 of yacc.c  */
-#line 56 "shell.y"
+#line 55 "shell.y"
     {
 	//printf("   Yacc: Execute command\n");
 	Command::_currentCommand.execute();
@@ -1396,7 +1395,7 @@ yyreduce:
   case 7:
 
 /* Line 1464 of yacc.c  */
-#line 60 "shell.y"
+#line 59 "shell.y"
     {
 	Command::_currentCommand.clear();
 	Command::_currentCommand.prompt();
@@ -1406,14 +1405,14 @@ yyreduce:
   case 8:
 
 /* Line 1464 of yacc.c  */
-#line 64 "shell.y"
+#line 63 "shell.y"
     { yyerrok; }
     break;
 
   case 11:
 
 /* Line 1464 of yacc.c  */
-#line 74 "shell.y"
+#line 73 "shell.y"
     {
 	Command::_currentCommand.
 		insertSimpleCommand( Command::_currentSimpleCommand );
@@ -1423,7 +1422,7 @@ yyreduce:
   case 14:
 
 /* Line 1464 of yacc.c  */
-#line 86 "shell.y"
+#line 85 "shell.y"
     {
 	//printf("   Yacc: insert argument \"%s\"\n", $1);
 	if (!(strchr((yyvsp[(1) - (1)].string_val), '*') == NULL && strchr((yyvsp[(1) - (1)].string_val), '?') == NULL)) {
@@ -1438,7 +1437,7 @@ yyreduce:
   case 15:
 
 /* Line 1464 of yacc.c  */
-#line 98 "shell.y"
+#line 97 "shell.y"
     {
 	//printf("   Yacc: insert command \"%s\"\n", $1);
 	Command::_currentSimpleCommand = new SimpleCommand();
@@ -1449,7 +1448,7 @@ yyreduce:
   case 16:
 
 /* Line 1464 of yacc.c  */
-#line 106 "shell.y"
+#line 105 "shell.y"
     {
 	Command::_currentCommand._background = 1;
 }
@@ -1458,7 +1457,7 @@ yyreduce:
   case 20:
 
 /* Line 1464 of yacc.c  */
-#line 118 "shell.y"
+#line 117 "shell.y"
     {
 	//printf("   Yacc: insert output \"%s\"\n", $2);
 	if (Command::_currentCommand._outFile) {
@@ -1471,7 +1470,7 @@ yyreduce:
   case 21:
 
 /* Line 1464 of yacc.c  */
-#line 126 "shell.y"
+#line 125 "shell.y"
     {
 	//printf ("  Yacc: insert input \"%s\"\n", $2);
 	Command::_currentCommand._inputFile = (yyvsp[(2) - (2)].string_val);
@@ -1481,7 +1480,7 @@ yyreduce:
   case 22:
 
 /* Line 1464 of yacc.c  */
-#line 131 "shell.y"
+#line 130 "shell.y"
     {
 	if (Command::_currentCommand._outFile) {
 		yyerror("Ambiguous output redirect");
@@ -1494,7 +1493,7 @@ yyreduce:
   case 23:
 
 /* Line 1464 of yacc.c  */
-#line 139 "shell.y"
+#line 138 "shell.y"
     {
 	if (Command::_currentCommand._outFile) {
 		yyerror("Ambiguous output redirect");
@@ -1508,7 +1507,7 @@ yyreduce:
   case 24:
 
 /* Line 1464 of yacc.c  */
-#line 148 "shell.y"
+#line 147 "shell.y"
     {
 	if (Command::_currentCommand._outFile) {
 		yyerror("Ambiguous output redirect");
@@ -1521,7 +1520,7 @@ yyreduce:
 
 
 /* Line 1464 of yacc.c  */
-#line 1525 "y.tab.c"
+#line 1524 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1733,7 +1732,7 @@ yyreturn:
 
 
 /* Line 1684 of yacc.c  */
-#line 162 "shell.y"
+#line 161 "shell.y"
 
 #include <regex.h>
 #include <dirent.h>
@@ -1921,28 +1920,7 @@ void expandEnv(char* temp) {
 	}
 
 }
-
-
-void escapeChar(char* temp) {
-	char final[strlen(temp)];
-	char *f = final;
-	char *t = temp;
-	while(*(t+1)!='\0') {
-		if (*t = '\\') {
-			*f = *(t+1);
-			t++;
-		}
-		else {
-		*f = *t;
-		}
-		f++;
-		t++;
-	}
-	*f = '\0';
-strcpy(temp,final);
 	
-}		
-
 	void
 yyerror(const char * s)
 {

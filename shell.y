@@ -27,7 +27,6 @@
 #include "command.h"
 #include <pwd.h>
 	char **array;
-	void escapeChar(char*);
 	void expandEnv(char*);
 	void checkThenInsert(char *);
 	void expandTilde(char *);
@@ -346,28 +345,7 @@ void expandEnv(char* temp) {
 	}
 
 }
-
-
-void escapeChar(char* temp) {
-	char final[strlen(temp)];
-	char *f = final;
-	char *t = temp;
-	while(*(t+1)!='\0') {
-		if (*t = '\\') {
-			*f = *(t+1);
-			t++;
-		}
-		else {
-		*f = *t;
-		}
-		f++;
-		t++;
-	}
-	*f = '\0';
-strcpy(temp,final);
 	
-}		
-
 	void
 yyerror(const char * s)
 {
