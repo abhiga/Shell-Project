@@ -149,12 +149,12 @@ Command::execute()
 	}
 	if(strcmp(_simpleCommands[0]->_arguments[0], "--debug") == 0) {
 		_debug = 1;
-		fprintf(stderr,"Entering debug mode\n");
+		fprintf(stderr,"Be Careful! Entering the shell's debug mode\n");
 		prompt();
 	}
 	if(strcmp(_simpleCommands[0]->_arguments[0], "--normal") == 0) {
 		_debug = 0;
-		fprintf(stderr,"Reverting to normal mode\n");
+		fprintf(stderr,"Reverting to normal mode.\n");
 		prompt();
 	}
 	
@@ -280,7 +280,6 @@ main()
 {
 	signal(SIGINT, avoid_controlc );
 	signal(SIGCHLD, avoid_zombiep);
-
 	Command::_currentCommand.prompt();
 	yyparse();
 }
