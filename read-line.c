@@ -17,11 +17,11 @@
 int line_length;;
 char line_buffer[MAX_BUFFER_LINE];
 int cursor_pos = 0;
-char **tablist = NULL;
-int tablistindex = 0;
-int tablistset = 0;
-int tablistsize = 0;
-int spaceindex = 0;
+char **tab_list = NULL;
+int tablist_index = 0;
+int tablist_set = 0;
+int tablist_size = 0;
+int space_index = 0;
 // Simple history array
 // This history does not change. 
 // Yours have to be updated.
@@ -128,20 +128,19 @@ char * read_line() {
             }
 		}
 		else if (ch ==9) {
-			if (tablistset == 0) {
+			int i;
+			if (tablist_set == 0) {
 				char reg[line_length+10];
 				reg[0] = '^';
-			
-				int i;
 				for (i = line_length - 1; i>=0; i--) {
 					if(line_buffer[i] == 32) {
-						spaceindex = i;
+						space_index = i;
 						break;
 					}
 				}
-				if (spaceindex != 0) {
-					int size = line_length - spaceindex;
-					strncpy(reg + 1, line_buffer + spaceindex + 1, size);
+				if (space_index != 0) {
+					int size = line_length - space_index;
+					strncpy(reg + 1, line_buffer + space_index + 1, size);
 					reg[size + 1] = '.';
 					reg[size + 2] = '*';
                 	reg[size + 3] = '$';
@@ -167,21 +166,31 @@ char * read_line() {
 				}
 				regmatch_t match;
 				struct dirent * list;
-				int maxEntries = 5;
-				tablistsize = 0;
-				tablist = (char **)malloc(maxEntries * sizeof(char *));
+				int max_Entries = 5;
+				tablist_size = 0;
+				tab_list = (char **)malloc(max_Entries * sizeof(char *));
 				while ((list = readdir(dir))!=NULL) {
 					if (regexec(&re, list->d_name, 1, &match, 0) == 0) {
-                        if (tablistsize == maxEntries) {
-                            maxEntries = maxEntries * 2;
-                            tablist = (char **)realloc(tablist, maxEntries * sizeof(char *));
+                        if (tablist_size == max_Entries) {
+                            max_Entries = max_Entries * 2;
+                            tab_list = (char **)realloc(tab_list, max_Entries * sizeof(char *));
                         }
-                        tablist[tablistsize++] = strdup(list->d_name);
+                        tab_list[tablist_size] = strdup(list->d_name);
+						tablist_size = tablist_size + 1;
                     }
                 }
-                tablistset = 1;
-					
+                tablist_set = 1;
 			}
+			ch = 8;
+			for (i=0; i < line_length; i++)
+				write(1,&ch, 1);
+			ch = 32;
+			for (i=0; i < line_length; i++)
+				write(1,&ch, 1);
+			ch = 8;
+			for (i=0; i < line_length; i++)
+				write(1,&ch, 1); 
+			//if (space
 		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
@@ -349,11 +358,11 @@ char * read_line() {
 	line_buffer[line_length]=10;
 	line_length++;
 	line_buffer[line_length]=0;
-	if (tablistset) {
-        spaceindex = 0;
-        tablistset = 0;
-        tablistindex = 0;
-        free(tablist);
+	if (tablist_set) {
+        space_index = 0;
+        tablist_set = 0;
+        tablist_index = 0;
+        free(tab_list);
     }
 	tcsetattr(0,TCSANOW,&orig_attr);
 	return line_buffer;
