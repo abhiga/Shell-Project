@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <termios.h>
+#include <dirent.h>
 
 #define MAX_BUFFER_LINE 2048
 
@@ -157,12 +158,29 @@ char * read_line() {
 				int regexbuff = regcomp(&re, reg, REG_EXTENDED | REG_NOSUB);
                 if (regexbuff != 0) {
                     perror("regcomp:problem compiling regular expression");
-                    return;
+                    exit(1);
                 }
 				char * dir = opendir(".");
 				if (dir == NULL) {
 					perror("opendir:problem opening directory");
+					exit(2);				
 				}
+				regmatch_t match;
+				struct dirent * list;
+				int maxEntries = 5;
+				tablistsize = 0;
+				tablist = (char **)malloc(maxEntries * sizeof(char *));
+				while ((list = readdir(dir))!=NULL) {
+					if (regexec(&re, list->d_name, 1, &match, 0) == 0) {
+                        if (tablistsize == maxEntries) {
+                            maxEntries = maxEntries * 2;
+                            tablist = (char **)realloc(tablist, maxEntries * sizeof(char *));
+                        }
+                        tablist[tablistsize++] = strdup(list->d_name);
+                    }
+                }
+                tablistset = 1;
+					
 			}
 		}
 		else if (ch==10) {
