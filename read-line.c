@@ -160,7 +160,7 @@ char * read_line() {
                     perror("regcomp:problem compiling regular expression");
                     exit(1);
                 }
-				char * dir = opendir(".");
+				DIR * dir = opendir(".");
 				if (dir == NULL) {
 					perror("opendir:problem opening directory");
 					exit(2);				
