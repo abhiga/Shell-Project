@@ -190,7 +190,15 @@ char * read_line() {
 			ch = 8;
 			for (i=0; i < line_length; i++)
 				write(1,&ch, 1); 
-			//if (space
+			if (space_index!=0) {
+				char * temp = tab_list[tablist_index];
+                for (i = 0; i < strlen(temp); i++)
+                    line_buffer[space_index + i + 1] = temp[i];
+			}
+			else {
+				strcpy(line_buffer, tab_list[tablist_index]);
+                line_length = strlen(line_buffer); 
+			}
 		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
