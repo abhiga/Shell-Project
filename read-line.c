@@ -147,6 +147,11 @@ char * read_line() {
                 	reg[size + 4] = '\0';
 				}
 				else {
+					strncpy(reg + 1, line_buffer, line_length);
+                    reg[line_length] = '.';
+                    reg[line_length + 1] = '*';
+                    reg[line_length + 2] = '$';
+                    reg[line_length + 3] = '\0';
 				}
 			}
 		}
