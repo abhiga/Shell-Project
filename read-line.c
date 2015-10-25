@@ -4,7 +4,7 @@
  * Example that shows how to read one line with simple editing
  * using raw terminal.
  */
-
+#include <regex.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -153,6 +153,12 @@ char * read_line() {
                     reg[line_length + 2] = '$';
                     reg[line_length + 3] = '\0';
 				}
+				regex_t re;
+				int regexbuff = regcomp(&re, reg, REG_EXTENDED | REG_NOSUB);
+                if (regexbuff != 0) {
+                    perror("regcomp");
+                    return;
+                }
 			}
 		}
 		else if (ch==10) {
