@@ -130,12 +130,23 @@ char * read_line() {
 			if (tablistset == 0) {
 				char reg[line_length+10];
 				reg[0] = '^';
-			}
-			int i;
-			for (i = line_length - 1; i>=0; i--) {
-				if(line_buffer[i] == 32) {
-					spaceindex = i;
-					break;
+			
+				int i;
+				for (i = line_length - 1; i>=0; i--) {
+					if(line_buffer[i] == 32) {
+						spaceindex = i;
+						break;
+					}
+				}
+				if (spaceindex != 0) {
+					int size = line_length - spaceindex;
+					strncpy(reg + 1, line_buffer + spaceindex + 1, size);
+					reg[size + 1] = '.';
+					reg[size + 2] = '*';
+                	reg[size + 3] = '$';
+                	reg[size + 4] = '\0';
+				}
+				else {
 				}
 			}
 		}
