@@ -194,11 +194,13 @@ char * read_line() {
 				char * temp = tab_list[tablist_index];
                 for (i = 0; i < strlen(temp); i++)
                     line_buffer[space_index + i + 1] = temp[i];
+				line_length = space_index + strlen(tab_list[tablist_index]) + 1;
 			}
 			else {
 				strcpy(line_buffer, tab_list[tablist_index]);
                 line_length = strlen(line_buffer); 
 			}
+			
 		}
 		else if (ch==10) {
 			// <Enter> was typed. Return line
