@@ -1,0 +1,34 @@
+Name: Abhijeet Gaurav
+Login: AGAURAV
+
+Features:
+		IO Redirection works
+		Pipes works
+		Background and Zombie works
+		Environment works
+		Words and special characters works
+		cd works
+		Quotes and escape characters partially works
+		CTRL-C works
+		Tilde expansion works
+		Wildcarding works
+		Robustness works
+		
+		
+	line editor:
+		History using up and down arrow key works.
+		Arrows keys left and right for to move cursor works
+		(ctrl-D) Delete end and Delete middle works
+		(ctrl-H) Backspace and Backspace middle works
+		Insert in the middle works
+		(ctrl-A) Home works
+        (ctrl-E) End works
+		Tab completion partially works (bonus)
+
+
+Extra Features implemented:
+	Tab completion partially works (5 points bonus)
+	When typed "--debug" the shell enters into debug mode printing command table and other useful debugging information.
+	When typed "--normal" the shell reverts shell back to normal mode.
+
+
